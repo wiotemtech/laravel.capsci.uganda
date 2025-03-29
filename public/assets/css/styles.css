@@ -1,0 +1,1688 @@
+
+
+body {
+    margin: 0; 
+    padding: 0; 
+    overflow-x: hidden; 
+}
+
+/*------------------------------start style for navbar---------------------------*/
+        .top-header {
+            background: red;
+            padding: 10px 0;
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+        .top-header .container .row div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .top-header i {
+            color: white;
+        }
+        .top-header a {
+            transition: color 0.3s ease-in-out;
+            color: white;
+        }
+        .top-header a:hover {
+            color: white;
+        }
+        
+    .uu{
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: fixed;
+            top: 20;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            margin-top: -140px;
+
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+        }
+        .navbar-nav .nav-item .nav-link {
+            font-size: 18px;
+            font-weight: 500;
+            color: black;
+            transition: color 0.3s ease-in-out;
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: red;
+            border-radius: 5px;
+            color: white;
+            padding: 5px;
+        }
+        .nav-link{
+            color: red;
+        }
+        
+    
+        .navbar-nav .dropdown-menu {
+            border-radius: 5px;
+            border: none;
+          
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+       
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            
+        }
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            box-shadow: none;
+            
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-header .row div {
+                text-align: center;
+                justify-content: center;
+                padding: 5px 0;
+
+            
+            }
+            .uu{
+                margin-top: -200px;
+            }
+        }
+
+
+
+
+/*--------------------------------end stye for navbar---------------------------*/
+
+
+
+
+/*------------------------------start style for sickle cell $ uhuru run---------------------------*/
+   .ercdv-cards-container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: space-between; 
+    background-size: cover;
+    padding: 100px;
+    
+    gap: 20px;
+    flex-wrap: wrap;
+    height: 60%; 
+    align-items: center; 
+    animation: ercdv-fadeIn 1s ease-out;
+  }
+
+  .ercdv-card {
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    width: 48%;
+    box-sizing: border-box;
+    color: #fff; 
+    opacity: 0;
+    animation: ercdv-slideIn 1s forwards;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .ercdv-card h2 {
+    font-family: 'poppins',sans-serif;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #fff; 
+  }
+
+  .ercdv-card p {
+    font-size: 18px;
+    text-align: center;
+    
+    font-family: 'poppins',sans-serif;
+    color: #fff; 
+    margin-bottom: 20px;
+  }
+
+  .ercdv-card button {
+    padding: 10px 20px;
+    text-align: right;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    color: #fff; 
+  }
+
+  .ercdv-card-left button {
+    background-color: red; 
+  }
+
+  .ercdv-card-left button:hover {
+    background-color: white;
+    color: red;
+  }
+
+  .ercdv-card-right button {
+    background-color: red; 
+  }
+
+  .ercdv-card-right button:hover {
+    background-color: white;
+    color: red;
+  }
+
+  
+  .ercdv-card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2); 
+  }
+
+  @media (max-width: 768px) {
+    .ercdv-cards-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      padding-top: 100px;
+      margin-top: 180px;
+      
+    }
+
+    .ercdv-card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  @keyframes ercdv-fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ercdv-slideIn {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .ercdv-card button:hover {
+    animation: ercdv-shake 0.5s ease-in-out;
+  }
+
+  @keyframes ercdv-shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+
+  /*-------------------------------end style for sickle cell $ uhuru run-------------------------*/
+
+
+
+/*----------------------------------------start stle for landing page--------------------------------*/
+      .landing-page {
+        height: 70vh; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden; 
+      }
+  
+      .slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: hidden;
+      }
+  
+      .slider img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        animation: slideIn 12s ease-in-out infinite; 
+      }
+  
+    
+      @keyframes slideIn {
+        0%, 100% {
+          transform: translateX(100%); 
+          opacity: 0;
+        }
+        10%, 25% {
+          transform: translateX(0);    
+          opacity: 1;
+        }
+        50%, 75% {
+          transform: translateX(0);   
+          opacity: 1;
+        }
+        90%, 100% {
+          transform: translateX(-100%); 
+          opacity: 0;
+        }
+      }
+  
+  
+      .slider img:nth-child(2) {
+        animation-delay: 6s; 
+      }
+
+
+
+/*--------------------------------------end style for landing page-----------------------------*/
+
+
+
+
+
+
+
+/*-------------------------------------start style for understand sickle cell---------------------------*/
+.fw-bold{
+    font-family: 'poppins',sans-serif;
+    font-size: 30px;
+}
+
+.fw-bold-p{
+    font-family: 'poppins',sans-serif;
+    font-size: 18px;
+}
+.sickle-section {
+    margin-top: -5px;
+    padding: 60px 0;
+    background-color: red;
+    color: white;
+}
+
+.sickle-text {
+    animation: fadeInLeft 1.5s ease-in-out;
+}
+
+.sickle-video {
+    animation: fadeInRight 1.5s ease-in-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.sickle-video iframe {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sickle-video iframe:hover {
+    transform: scale(1.05);
+}
+
+.read-more-btn {
+    background-color: #fff;
+    color:red;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.read-more-btn:hover {
+    background-color: #ff1a1a;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+@media (max-width: 767px) {
+    .sickle-video {
+        padding-top: 20px;
+    }
+}
+
+/*------------------------------------ end style for understanding sickle cell--------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------start style for about us---------------------------------*/
+#aboutUs {
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.aboutus-h1{
+    font-family: 'poppins',sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: red;
+}
+
+.aboutus-h2{
+    font-family: 'poppins',sans-serif;
+    font-size: 25px;
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.about-box {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    transition:
+        transform 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.about-box::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: 0;
+    left: 0;
+    background: red;
+}
+
+.about-icon {
+    font-size: 35px;
+    color: red;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-box:hover .about-icon {
+    transform: scale(1.2);
+}
+
+.about-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.6s ease-in-out,
+        transform 0.6s ease-in-out;
+}
+
+.about-box:hover .about-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.text-accent {
+    color: red;
+}
+.text-highlight {
+    color: red;
+}
+
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInTop {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.col-md-4:nth-child(1) .about-box {
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+.col-md-4:nth-child(2) .about-box {
+    animation: slideInTop 1s ease-out forwards;
+}
+
+.col-md-4:nth-child(3) .about-box {
+    animation: slideInRight 1s ease-out forwards;
+}
+
+/*----------------------------------- end style for about us----------------------------------*/
+
+
+
+
+/*-------------------------------------start style for our services---------------------------------*/
+
+
+.ercdv-services {
+    text-align: center;
+    padding: 40px 0;
+    background: linear-gradient(to top, rgb(174, 106, 106), white);
+}
+
+.ercdv-services h1 {
+    font-size: 30px;
+    font-family: 'poppins',sans-serif;
+    margin-bottom: 25px;
+    color: red;
+}
+
+.ercdv-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.ercdv-service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.ercdv-service-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+    height: 220px;
+    overflow: hidden;
+}
+
+.ercdv-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ercdv-service-card i {
+    font-size: 2rem;
+    color: red; 
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; 
+}
+
+.ercdv-service-card:hover i {
+    transform: rotate(360deg); 
+    background-color: red; 
+    color: #fff; 
+}
+
+.ercdv-service-card h3 {
+    font-size: 20px;
+    font-family: 'poppins',sans-serif;
+    color: black;
+    margin-bottom: 8px;
+    
+}
+
+.ercdv-service-card p {
+    font-size: 16px;
+    font-family: 'poppins',sans-serif;
+    color: #6c757d;
+    line-height: 1.3;
+}
+
+@media (max-width: 600px) {
+    .ercdv-services h1 {
+        font-size: 1.8rem;
+    }
+    .ercdv-service-card {
+        height: auto;
+    }
+}
+
+
+
+
+/*-------------------------------------end style for our services----------------------------*/
+
+
+
+
+/*--------------------------------------styles for our impact----------------------*/
+
+.statistics-h1{
+    font-family: 'poppins',sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: red;
+    
+}
+
+/*------------------------------end styles for our impact----------------------*/
+
+
+
+
+
+/*---------------------------------start style for faq------------------------*/
+
+.faq-h1{
+    font-family: 'poppins',sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.faq-p{
+    font-family: 'poppins',sans-serif;
+    font-size: 18px;
+}
+
+/*--------------------------------------end style for faq-------------------------------*/
+
+
+
+
+
+/*----------------------start styles for our patners-------------------*/
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.partner-card {
+    background: #fff;
+    padding: 10px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px; 
+    width: 95%;
+    opacity: 0; 
+    animation: fadeInUp 0.8s ease-out forwards;
+    box-shadow: 0px -4px 8px rgba(136, 157, 240, 0.4), 
+                0px 4px 8px rgba(136, 157, 240, 0.4); 
+}
+
+.partner-logo {
+    max-width: 90%;
+    max-height: 60px;
+    transition: transform 0.3s ease-in-out; 
+}
+
+.partner-card:hover .partner-logo {
+    transform: scale(1.1); 
+}
+
+.row {
+    margin: 0; 
+}
+
+.col-lg-3, .col-md-4, .col-sm-6, .col-12 {
+    padding: 0;
+}
+
+
+.col-lg-3:nth-child(1) .partner-card { animation-delay: 0s; }
+.col-lg-3:nth-child(2) .partner-card { animation-delay: 0.1s; }
+.col-lg-3:nth-child(3) .partner-card { animation-delay: 0.2s; }
+.col-lg-3:nth-child(4) .partner-card { animation-delay: 0.3s; }
+.col-lg-3:nth-child(5) .partner-card { animation-delay: 0.4s; }
+.col-lg-3:nth-child(6) .partner-card { animation-delay: 0.5s; }
+.col-lg-3:nth-child(7) .partner-card { animation-delay: 0.6s; }
+.col-lg-3:nth-child(8) .partner-card { animation-delay: 0.7s; }
+
+
+
+
+
+
+
+/*--------------------------end styels for our partners--------------------------*/
+
+
+
+
+
+
+/*--------------------------------start style for contact us-----------------------------*/
+
+.contact .titlepage {
+    text-align: left;
+    padding-top: 20px;
+}
+
+.contact {
+    padding: 50px 0px;
+    font-family: Poppins;
+    background: url(../images/new.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main_form {
+    background: white;
+    padding: 55px 40px;
+}
+
+.contact .main_form .contactus {
+    border: #000 solid 1px;
+    padding: 0px 1px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 52px;
+    background: #fff;
+    color: #999999;
+    font-size: 16px;
+    border-top: inherit;
+    border-right: inherit;
+    border-left: inherit;
+}
+
+.contact .main_form .textarea {
+    margin-bottom: 25px;
+    color: #999999 !important;
+    width: 100%;
+    border: #000 solid 1px;
+    padding: 0px 1px;
+    padding-top: 38px;
+    background: #fff;
+    outline: none;
+    border-top: inherit;
+    border-right: inherit;
+    border-left: inherit;
+}
+
+.contact .main_form .send {
+    font-size: 16px;
+    transition: ease-in all 0.5s;
+    background-color: #000;
+    color: #fff;
+    padding: 12px 70px;
+    margin: 0 auto;
+    display: block;
+}
+
+.contact .main_form .send:hover {
+    background-color: red;
+    transition: ease-in all 0.5s;
+    color: #fff;
+}
+
+#contact *::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+.current {
+    color: #fff;
+    margin-top: -4px;
+    position: absolute;
+}
+
+.white {
+    color: red;
+}
+
+.cont {
+    text-align: left;
+}
+
+.cont span {
+    color: #fff;
+    font-size: 30px;
+    line-height: 70px;
+    padding: 30px 0px 65px 0px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.cont a {
+    font-size: 20px;
+    transition: ease-in all 0.5s;
+    background-color: #fff;
+    color: red;
+    width: 100%;
+    max-width: 275px;
+    padding: 7px 0px;
+    text-align: center;
+    display: inline-block;
+}
+
+.cont a:hover {
+    background-color: #ff3333;
+    transition: ease-in all 0.5s;
+    color: #fff;
+}
+
+/*-------------------------- end style for contact us----------------------------*/
+
+/*-----------------------start style for footer section--------------------*/
+
+.footer-section {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.fw-bold{
+    font-size: 18px;
+    font-family: 'poppins',sans-serif;
+}
+
+.footer-p{
+    font-size: 14px;
+}
+.footer-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-link:hover {
+    color: #f39c12;
+}
+
+.footer-social-icons i {
+    font-size: 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-social-icons i:hover {
+    color: blue;
+}
+
+.footer-logo {
+    width: 150px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.fw-bold-2{
+    font-size: 4px;
+}
+/*-------------------------end style for footer section--------------------------*/
+
+
+
+
+/*---------------------------------start style for gallery section---------------------*/
+.gallery {
+    padding: 60px 0;
+    background: whitesmoke;
+    text-align: center;
+    color: #fff;
+}
+
+.gallery h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: red;
+}
+
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*-------------------------------- start landing page in gallery section-------------------*/
+.landing-section {
+    margin-top: 120px;
+    position: relative;
+    width: 100%;
+    height: 250px;
+    padding: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+}
+.landing-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1.5s ease-in-out;
+}
+.landing-content h1 {
+    font-size: 2.5rem;
+    font-family: 'poppins',sans-serif;
+    font-weight: bold;
+    color: white;
+}
+.landing-content p {
+    font-size: 1.5rem;
+    font-family: 'poppins',sans-serif;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    
+
+    
+    .landing-section{
+        margin-top: 180px;
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/*--------------------------------------end landing in gallery section--------------------*/
+
+/*--------------------------------------end style for gallery section-----------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* start of asked*/
+.asked_main {
+
+     background-color: #2c3e50;
+ }
+
+ .titlepage h2 {
+     font-size: 36px;
+     font-weight: bold;
+     color: white;
+     text-align: center;
+     margin-bottom: 30px;
+  
+ }
+
+ .titlepage h2 span {
+     color: red;
+ }
+
+ .ask_img figure img {
+     width: 100%;
+     height: auto; /* Ensures the image maintains aspect ratio */
+     border-radius: 15px;
+     transition: transform 0.3s ease-in-out;
+ }
+
+ .ask_img figure img:hover {
+     transform: scale(1.05);
+ }
+
+ .ask_box {
+     background-color: white;
+     border-radius: 10px;
+     padding: 25px;
+     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .simpaly {
+     margin-bottom: 20px;
+     transition: transform 0.3s ease;
+ }
+
+ .simpaly:hover {
+     transform: translateX(5px);
+ }
+
+ .slider {
+     font-size: 20px;
+     font-weight: bold;
+     color: red;
+     cursor: pointer;
+     margin-bottom: 10px;
+     display: flex;
+     align-items: center;
+ }
+
+ .slider span {
+     font-size: 20px;
+     margin-right: 10px;
+ }
+
+ .content {
+     padding: 0 20px;
+     display: none;
+     margin-top: 10px;
+     color: black;
+     font-weight: bold;
+     font-size: 20px;
+ }
+
+ .content p {
+     font-size: 16px;
+     line-height: 1.6;
+ }
+
+ .simpaly.active .content {
+     display: block;
+ }
+
+ /* Adjust padding and image size on small devices */
+ @media (max-width: 768px) {
+     .ask_img {
+         text-align: center;
+         padding-top: 10px; /* Reduce padding-top on small screens */
+     }
+
+     .ask_box {
+         margin-top: 10px; /* Reduce padding-top for the ask box */
+         padding-top: 20px;
+     }
+
+     .ask_img figure img {
+         max-height: 400px; /* Adjust image size */
+         object-fit: cover; /* Ensure image is fully visible */
+     }
+ }
+ /*end of asle*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------start styel for our team section-------------------------*/
+
+
+.team-section {
+    background: linear-gradient(135deg, white, rgb(137, 34, 34), white);
+  color: #fff; /* Dark background for the section */
+    padding: 70px 0;
+    padding-left: 44px;
+    padding-right: 44px;
+    border-radius: 15px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .team-card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    background-color: #fff;
+    color: #333;
+    border-radius: 15px;
+    opacity: 0;
+    transform: translateX(100%); /* Cards start from outside the viewport */
+    transition: transform 1s ease, opacity 1s ease; /* Animation duration */
+  }
+
+  /* Card pop-in animation from different directions */
+  .team-card.left {
+    transform: translateX(-100%); /* Start from left */
+  }
+
+  .team-card.right {
+    transform: translateX(100%); /* Start from right */
+  }
+
+  .team-card.top {
+    transform: translateY(-100%); /* Start from top */
+  }
+
+  .team-card.bottom {
+    transform: translateY(100%); /* Start from bottom */
+  }
+
+  .team-card.animate-left {
+    opacity: 1;
+    transform: translateX(0); /* Final position after animation */
+  }
+
+  .team-card.animate-right {
+    opacity: 1;
+    transform: translateX(0); /* Final position after animation */
+  }
+
+  .team-card.animate-top {
+    opacity: 1;
+    transform: translateY(0); /* Final position after animation */
+  }
+
+  .team-card.animate-bottom {
+    opacity: 1;
+    transform: translateY(0); /* Final position after animation */
+  }
+
+  .team-card img {
+    border-radius: 50%;
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .team-card img:hover {
+    transform: scale(1.15);
+  }
+
+  .team-card .card-body {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .team-card .card-body h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .team-card .card-body p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Social Icons */
+  .social-icons a {
+    font-size: 24px;
+    margin: 0 10px;
+    color:  red;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: #007bff;
+  }
+  .btn-2{
+    background-color: red;
+    border: none;
+    font-size: 18px;
+    font-family: 'poppins',sans-serif;
+    padding: 5px 5px;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .btn-2:hover{
+    background-color: white;
+    color: #007bff;
+  }
+
+  /* Modal for Team Member Bio */
+  .modal-header {
+    background-color: rgb(193, 53, 53);
+    font-family: 'poppins',sans-serif;
+    color: white;
+  }
+
+  .modal-body {
+    background-color: #f4f4f9;
+    font-family: 'poppins',sans-serif
+    ;
+    color: #333;
+  }
+
+  /* Ensure responsiveness on small devices */
+  @media (max-width: 768px) {
+    .team-card {
+      margin-bottom: 20px;
+      transform: translateX(100%); /* Cards still move from outside */
+    }
+  }
+
+
+
+  /*---------------------------------------end style for our team section --------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

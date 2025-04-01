@@ -4,9 +4,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{vue_capture?}', function () {
-    return view('welcome');
-})->where('vue_capture', '[\/\w\.-]*');
+// Route::get('/{vue_capture?}', function () {
+//     return view('welcome');
+// })->where('vue_capture', '[\/\w\.-]*');
 
 
 Route::get('/',[HomeController::class,'index'])->name('index');

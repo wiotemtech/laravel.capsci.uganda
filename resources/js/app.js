@@ -1,6 +1,13 @@
-import './bootstrap';
-import { createApp } from "vue";
-import router from './router';
-import App from "./App.vue";
+import "./bootstrap";
 
-createApp(App).use(router).mount("#app");
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+import { createApp } from "vue";
+import router from "./router";
+import App from "./components/App.vue";
+
+const app = createApp(App);
+app.use(router);
+
+app.mount("#app");

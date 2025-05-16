@@ -36,7 +36,7 @@ export default {
             },
             {
                 question: "Who to marry?",
-                answer: '<img src="/public/assets/images/21.png" alt="Marriage Guidance Chart" class="img-fluid" />',
+                answer: '<img src="/public/assets/images/chart.jpeg" alt="Marriage Guidance Chart" class="img-fluid" />',
             },
         ]);
 

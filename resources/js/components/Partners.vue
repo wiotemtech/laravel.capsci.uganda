@@ -233,6 +233,48 @@ export default {
                     />
                 </div>
             </div>
+            <div
+                class="col-lg-3 col-md-4 col-sm-6 col-12"
+                :class="{
+                    'dark-theme-col-lg-3': isDarkMode,
+                    'dark-theme-col-md-4': isDarkMode,
+                    'dark-theme-col-sm-6': isDarkMode,
+                    'dark-theme-col-12': isDarkMode,
+                }"
+            >
+                <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/globalgene.jpeg"
+                        alt="Partner 8"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
+            </div>
+            <div
+                class="col-lg-3 col-md-4 col-sm-6 col-12"
+                :class="{
+                    'dark-theme-col-lg-3': isDarkMode,
+                    'dark-theme-col-md-4': isDarkMode,
+                    'dark-theme-col-sm-6': isDarkMode,
+                    'dark-theme-col-12': isDarkMode,
+                }"
+            >
+                <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/spearmotors.jpeg"
+                        alt="Partner 8"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
+            </div>
         </div>
     </section>
 </template>

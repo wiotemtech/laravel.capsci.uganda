@@ -36,9 +36,9 @@ export default {
     <div>
         <div class="scroll-banner" :class="{ 'dark-theme-banner': isDarkMode }">
             <div class="scroll-content">
-                Catherine PHIL Sickle Cell Initiative
+                CATHERINE PHIL SICKLE CELL SUPPORT  INITIATIVE. 
                 <span class="line-break"><br /></span>
-                "LEAVE NO ONE BEHIND"
+                
             </div>
         </div>
 
@@ -142,7 +142,7 @@ export default {
                     >Contact-us</router-link
                 >
                 <router-link
-                    to=""
+                    to="jdjdjd"
                     class="donate-btn"
                     :class="{ 'dark-theme-button': isDarkMode }"
                     data-bs-toggle="modal"

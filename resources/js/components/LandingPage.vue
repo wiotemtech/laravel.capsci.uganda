@@ -56,7 +56,7 @@ export default {
                     style="width: 50px; height: 50px; border-radius: 33px"
                 />
                 <h3 id="kk" :class="{ 'dark-theme-heading': isDarkMode }">
-                    CATHERIN PHILL SICKLE CELL INITIATIVE <br />
+                   CATHERINE PHIL SICKLE CELL SUPPORT  INITIATIVE.  <br />
                     "LEAVE NO ONE BEHIND"
                 </h3>
             </div>

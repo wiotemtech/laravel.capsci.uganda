@@ -36,6 +36,18 @@ export default {
                         :class="{ 'dark-theme-partner-logo': isDarkMode }"
                     />
                 </div>
+
+                  <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/cent.jpg"
+                        alt="Partner 1"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
             </div>
             <div
                 class="col-lg-3 col-md-4 col-sm-6 col-12"
@@ -51,8 +63,20 @@ export default {
                     :class="{ 'dark-theme-partner-card': isDarkMode }"
                 >
                     <img
-                        src="/public/assets/images/p2.jpeg"
+                        src="/public/assets/images/unoc.png"
                         alt="Partner 2"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
+
+                  <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/kcb.png"
+                        alt="Partner 1"
                         class="partner-logo"
                         :class="{ 'dark-theme-partner-logo': isDarkMode }"
                     />
@@ -78,6 +102,18 @@ export default {
                         :class="{ 'dark-theme-partner-logo': isDarkMode }"
                     />
                 </div>
+
+                  <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/standbic.jpg"
+                        alt="Partner 1"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
             </div>
             <div
                 class="col-lg-3 col-md-4 col-sm-6 col-12"
@@ -95,6 +131,18 @@ export default {
                     <img
                         src="/public/assets/images/code.png"
                         alt="Partner 4"
+                        class="partner-logo"
+                        :class="{ 'dark-theme-partner-logo': isDarkMode }"
+                    />
+                </div>
+
+                  <div
+                    class="partner-card"
+                    :class="{ 'dark-theme-partner-card': isDarkMode }"
+                >
+                    <img
+                        src="/public/assets/images/ntv.jpeg"
+                        alt="Partner 1"
                         class="partner-logo"
                         :class="{ 'dark-theme-partner-logo': isDarkMode }"
                     />
@@ -120,6 +168,7 @@ export default {
                         :class="{ 'dark-theme-partner-logo': isDarkMode }"
                     />
                 </div>
+                
             </div>
             <div
                 class="col-lg-3 col-md-4 col-sm-6 col-12"

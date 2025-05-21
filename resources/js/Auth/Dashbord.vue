@@ -1,6 +1,57 @@
+<script>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+export default {
+  name: "Dashboard",
+  setup() {
+    const isSidebarCollapsed = ref(true);
+    const router = useRouter();
+
+    const toggleSidebar = () => {
+      isSidebarCollapsed.value = !isSidebarCollapsed.value;
+    };
+
+    const logout = async () => {
+      try {
+      
+        await fetch("http://localhost:8000/api/logout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        router.push("/login");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
+
+    onMounted(() => {
+      const handleResize = () => {
+        isSidebarCollapsed.value = window.innerWidth <= 768;
+      };
+      handleResize();
+      window.addEventListener("resize", handleResize);
+    });
+
+    return {
+      isSidebarCollapsed,
+      toggleSidebar,
+      logout,
+    };
+  },
+};
+</script>
+
+
 <template>
   <div class="d-flex flex-column h-100">
-    
     <div class="sidebar" :class="{ collapsed: isSidebarCollapsed }" id="sidebar">
       <div class="sidebar-header">
         <h3>Dashboard</h3>
@@ -14,9 +65,10 @@
 
         <li :class="{ active: $route.path === '/dashboard/posts' }">
           <router-link to="/dashboard/posts">
-            <i class="fas fa-plus-circle"></i> Posts
+            <i class="fas fa-plus-circle"></i> Post Blog
           </router-link>
         </li>
+        <!--
         <li :class="{ active: $route.path === '/dashboard/add-blogs' }">
           <router-link to="/dashboard/add-blogs">
             <i class="fas fa-blog"></i> Add Blogs
@@ -27,6 +79,7 @@
             <i class="fas fa-folder-plus"></i> Add Resources
           </router-link>
         </li>
+      -->
         <li>
           <a href="#" @click.prevent="logout">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -35,61 +88,25 @@
       </ul>
     </div>
 
-   
     <div class="top-navbar" :class="{ expanded: !isSidebarCollapsed }" id="top-navbar">
       <button class="toggle-button" @click="toggleSidebar">
         <i class="fas fa-bars"></i>
       </button>
       <div class="logo">
-        <img src="https://via.placeholder.com/150" alt="Logo" class="logo-img" />
+        <img src="/public/assets/images/logo1.png" alt="Logo" class="logo-img" />
       </div>
       <button class="logout-button" @click="logout">
         <i class="fas fa-sign-out-alt"> logout</i>
       </button>
     </div>
 
-  
     <main class="flex-grow-1" :class="{ expanded: !isSidebarCollapsed }" id="main-content">
       <router-view />
     </main>
-
-    
   </div>
 </template>
 
-<script>
-import { ref, onMounted } from 'vue';
 
-export default {
-  name: 'Dashboard',
-  setup() {
-    const isSidebarCollapsed = ref(true);
-
-    const toggleSidebar = () => {
-      isSidebarCollapsed.value = !isSidebarCollapsed.value;
-    };
-
-    const logout = () => {
-      console.log('Logging out...');
-     
-    };
-
-    onMounted(() => {
-      const handleResize = () => {
-        isSidebarCollapsed.value = window.innerWidth <= 768;
-      };
-      handleResize();
-      window.addEventListener('resize', handleResize);
-    });
-
-    return {
-      isSidebarCollapsed,
-      toggleSidebar,
-      logout,
-    };
-  },
-};
-</script>
 
 <style scoped>
 .sidebar {
@@ -155,6 +172,7 @@ export default {
   transition: margin-left 0.3s ease;
   margin-top: 60px;
 }
+
 #main-content.expanded {
   margin-left: 250px;
 }
@@ -174,6 +192,7 @@ export default {
   transition: margin-left 0.3s ease;
   height: 60px;
 }
+
 .top-navbar.expanded {
   margin-left: 250px;
 }

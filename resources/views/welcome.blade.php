@@ -13,23 +13,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
-
 <!-- Font Awesome CDN -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-+JUsq+kK5OeNN4V5z9AYg8tU+FvU5B3E9HJz8GHavE1Ckcl+elRQgYloT+JXY2QWvE3ZZHflHSkL1PZCFe9nVw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  integrity="sha512-+JUsq+kK5OeNN4V5z9AYg8tU+FvU5B3E9HJz8GHavE1Ckcl+elRQgYloT+JXY2QWvE3ZZHflHSkL1PZCFe9nVw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
-
-
-
-<!-- Styles / Scripts -->
+    <!-- Styles / Scripts -->
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 

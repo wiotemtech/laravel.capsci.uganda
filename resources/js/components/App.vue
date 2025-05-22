@@ -52,12 +52,22 @@ export default {
   setup() {
     const route = useRoute();
 
-    // List of routes where you want to hide layout
-    const hiddenLayoutPaths = ['/dashboard', '/dashboard/posts', '/admin','/dashboard/post-create'];
+    // Base hidden layout paths
+    const baseHiddenPaths = [
+      '/dashboard',
+      '/dashboard/posts',
+      '/admin',
+      '/dashboard/post-create',
+      '/login'
+    ];
 
     // Computed property to determine if layout should be hidden
     const hideLayout = computed(() => {
-      return hiddenLayoutPaths.includes(route.path) || route.name === 'NotFound';
+      return (
+        baseHiddenPaths.includes(route.path) ||
+        /^\/dashboard\/posts\/\d+\/edit$/.test(route.path) || // match /dashboard/posts/ANY_ID/edit
+        route.name === 'NotFound'
+      );
     });
 
     return { route, hideLayout };

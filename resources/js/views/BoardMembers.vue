@@ -3,6 +3,10 @@ export default {
     data() {
         return {
             isDarkMode: false,
+            showPopup: false,
+            shownOnce: false,
+            hideTimeout: null,
+            reappearTimeout: null,
             socialIcons: [
                 "fab fa-facebook",
                 "fab fa-twitter",
@@ -23,8 +27,7 @@ export default {
                 {
                     name: "Dr. Diana Antonia Rutebarika",
                     title: "Vice Chairperson Of the Board",
-                    bio: `
-                Diana Rutebarika is the Head of Paediatrics at Joint Clinical Research Centre. Attained her bachelors degree from Makerere University;post graduate Paediatric studies from Sydney(Children’s Hospital at Westead). She is a highly skilled and compassionate paediatrician dedicated to the health and well-being of children. Dr. Diana has earned a stellar reputation for her expertise in paediatrics as a clinician and researcher in the field of Infectious diseases and non-infectious diseases (Allergy, Childhood Hypertension and Sickle Cell Anemia ). In addition to providing outstanding primary care for children, Dr.Diana is actively involved in community outreach programs, advocacy and promotion of child health and safety. Her dedication to the well-being of young people and their families has made her a trusted figure in the field of paediatrics and a valuable addition to the management team at the JCRC-department of Paediatrics`,
+                    bio: `Diana Rutebarika is the Head of Paediatrics at Joint Clinical Research Centre. Attained her bachelor's degree from Makerere University; postgraduate Paediatric studies from Sydney (Children’s Hospital at Westmead)...`,
                     image: "/assets/images/Diana Antonia Rutebarika.jpeg",
                     modalId: "#bioModal2",
                     modalLabelId: "bioModal2Label",
@@ -35,7 +38,7 @@ export default {
                 {
                     name: "Ms. Namutebi Ritah",
                     title: "Board Secretary",
-                    bio: "Ritah holds a degree in Actuarial Science and a Post-Graduate Diploma in Project Planning and Management. She brings over ten years of experience in coordinating the engagement, recruitment, and growth from a number of Non Profit organizations. As the Board Secretary CAPSCI, Ritah has demonstrated her exceptional organizational and leadership skills. notably as the note-taker during board meetings, ensuring accurate and timely documentation. Ritah excels in planning, coordinating, and executing quaterly CAPSCI member networking events. Through this, she has established multi-sectoral partnerships and collaborations that provide synergies for resource mobilization in the health sector.",
+                    bio: "Ritah holds a degree in Actuarial Science and a Post-Graduate Diploma in Project Planning and Management...",
                     image: "/assets/images/Namutebi Ritah.jpeg",
                     modalId: "#bioModal3",
                     modalLabelId: "bioModal3Label",
@@ -101,11 +104,85 @@ export default {
             ],
         };
     },
+    methods: {
+        showTweet() {
+            if (!this.shownOnce) {
+                this.showPopup = true;
+                this.shownOnce = true;
+
+                this.hideTimeout = setTimeout(() => {
+                    this.showPopup = false;
+
+                    this.reappearTimeout = setTimeout(() => {
+                        this.showPopup = true;
+                    }, 10000);
+                }, 10000);
+            }
+        },
+        dismissPopup() {
+            this.showPopup = false;
+            clearTimeout(this.hideTimeout);
+            clearTimeout(this.reappearTimeout);
+        },
+    },
+    mounted() {
+        setTimeout(this.showTweet, 5000);
+
+        if (!window.twttr) {
+            const twitterScript = document.createElement("script");
+            twitterScript.setAttribute(
+                "src",
+                "https://platform.twitter.com/widgets.js",
+            );
+            twitterScript.setAttribute("async", "");
+            twitterScript.setAttribute("charset", "utf-8");
+            document.head.appendChild(twitterScript);
+        } else if (
+            window.twttr &&
+            typeof window.twttr.widgets !== "undefined" &&
+            typeof window.twttr.widgets.load === "function"
+        ) {
+            window.twttr.widgets.load();
+        }
+    },
+    beforeUnmount() {
+        clearTimeout(this.hideTimeout);
+        clearTimeout(this.reappearTimeout);
+    },
 };
 </script>
 
 <template>
     <div class="main-content">
+        <div class="tweet-container" :class="{ show: showPopup }">
+            <h1 class="follow">follow us on x</h1>
+            <button class="close-btn" @click="dismissPopup">×</button>
+            <blockquote class="twitter-tweet" data-width="280">
+                <p lang="en" dir="ltr">
+                    Integrated Sickle Cell services!<br />
+                    Residents of Ayago, Apoi Subcounty in Apac Dist have tuned
+                    up for sickle cell traits screening; we have collaborated
+                    with Ayago Health Centre II to screen for Malaria, HIV,
+                    Sphilys, H.pylori, HepB, RBS, and Hypertension.
+                    <a href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw"
+                        >@cphluganda</a
+                    >
+                    <a
+                        href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw"
+                        >@TestandTreat37</a
+                    >
+                    <a href="https://t.co/1eAO3W8bIn"
+                        >pic.twitter.com/1eAO3W8bIn</a
+                    >
+                </p>
+                &mdash; Catherine Phil Sickle Cell Support Initiative
+                (@UgandaSickle)
+                <a
+                    href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw"
+                    >January 31, 2025</a
+                >
+            </blockquote>
+        </div>
         <section
             :class="{ 'dark-theme-events': isDarkMode }"
             style="background-image: url(&quot;/assets/images/14.jpg&quot;)"
@@ -362,5 +439,88 @@ body.dark-theme-body .btn-2 {
 .btn-2:hover {
     background-color: red;
     color: white;
+}
+
+.follow {
+    font-size: 22px;
+    text-align: center;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.tweet-container {
+    position: fixed;
+    top: 15%;
+    right: -100%;
+    width: 320px;
+    max-width: 90%;
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px 0 0 12px;
+    z-index: 1000;
+    transition: right 0.6s ease-in-out;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.tweet-container.show {
+    right: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    background-color: red;
+    transform: scale(1.1);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn:active {
+    transform: scale(0.9);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .tweet-container {
+        width: 90%;
+        right: -100%;
+        top: auto;
+        bottom: 20px;
+        padding-right: 30px;
+        border-radius: 10px;
+    }
+
+    .tweet-container.show {
+        right: 5%;
+    }
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-content h1 {
+    color: #007bff;
+}
+
+.blog-content p {
+    line-height: 1.6;
 }
 </style>

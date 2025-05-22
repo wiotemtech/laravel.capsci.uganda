@@ -34,6 +34,7 @@ export default {
 
 <template>
     <div>
+        
         <div class="scroll-banner" :class="{ 'dark-theme-banner': isDarkMode }">
             <div class="scroll-content">
                 CATHERINE PHIL SICKLE CELL SUPPORT  INITIATIVE. 

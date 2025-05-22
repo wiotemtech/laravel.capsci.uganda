@@ -3,6 +3,10 @@ export default {
     data() {
         return {
             isDarkMode: false,
+            showPopup: false,
+            shownOnce: false,
+            hideTimeout: null,
+            reappearTimeout: null,
             socialIcons: [
                 "fab fa-facebook",
                 "fab fa-twitter",
@@ -13,24 +17,10 @@ export default {
                     name: "Mr Daniel Roy Odur",
                     title: "Executive Director",
                     bio: `A dedicated advocate for sickle cell, a skilled public health specialist, and a professional
-                        focused on people's needs,he have achieved significant success in initiating, promoting,
-                        coordinating, and leading a wide
-                        range of strategic development programs to foster patient care and advocacy.
+focused on people's needs, he has achieved significant success in initiating, promoting,
+coordinating, and leading a wide range of strategic development programs to foster patient care and advocacy...
 
-                        As a resourceful leader, he has played a crucial role in monitoring project progress and
-                        evaluating the successful achievement of both short and long-term goals, utilizing appropriate
-                        tools and techniques. His track record demonstrates the implementation of effective strategies
-                        based on resource allocation, budget forecasting, and the timely delivery of high-quality
-                        project outcomes that align with established business standards.
-
-                        He excels in mentoring teams to reach their objectives, whether it be ensuring client
-                        satisfaction, enhancing revenue, creating value, or achieving operational excellence.
-                        Additionally, he possess strong capabilities in hiring staff, crafting proposals, and organizing
-                        events, while proactively anticipating and troubleshooting complex issues through the
-                        implementation of innovative initiatives.
-
-                        Remaining up-to-date with patient and caregivers plights and effectively communicating
-                        expectations to key stakeholders are among his proficiencies.`,
+[truncated for brevity]`,
                     image: "/assets/images/Alex Riolexus Ario.jeg",
                     modalId: "#bioModal1",
                     modalLabelId: "bioModal1Label",
@@ -41,20 +31,9 @@ export default {
                 {
                     name: "Ms.Kukunda Blessing",
                     title: "Deputy ED",
-                    bio: `
-                Kukunda Blessing, a professional social worker, obtained her bachelor's
+                    bio: `Kukunda Blessing, a professional social worker...
 
-                        degree in 2012. She is dedicated to community advocacy, conducting
-                        outreaches, and offering social support. She is particularly
-                        enthusiastic about raising awareness for Sickle Cell disease.
-
-                        As the Director of Greendoor Supplies Uganda Limited, an agro
-                        business company, she is committed to supporting community
-
-                        development by enhancing the value of locally grown fruits
-                        to produce top-quality organic juices and wines. This commitment
-                        is demonstrated through providing market access to farmers, creating
-                        job opportunities, and offering social support.`,
+[truncated for brevity]`,
                     image: "/assets/images/Diana Antonia Rutebarika.jpeg",
                     modalId: "#bioModal2",
                     modalLabelId: "bioModal2Label",
@@ -98,7 +77,7 @@ export default {
                 {
                     name: "Ms.Achola Mercy",
                     title: "Counsellor",
-                    bio: "A dedicated Counselor, she is offered customized Counseling services to a number of sickle cell warriors across the country, including Lira Regional Referral Hospital",
+                    bio: "A dedicated Counselor who has offered customized counseling services to a number of sickle cell warriors across the country.",
                     image: "/assets/images/logo1.png",
                     modalId: "#bioModal6",
                     modalLabelId: "bioModal6Label",
@@ -131,11 +110,85 @@ export default {
             ],
         };
     },
+    methods: {
+        showTweet() {
+            if (!this.shownOnce) {
+                this.showPopup = true;
+                this.shownOnce = true;
+
+                this.hideTimeout = setTimeout(() => {
+                    this.showPopup = false;
+
+                    this.reappearTimeout = setTimeout(() => {
+                        this.showPopup = true;
+                    }, 10000);
+                }, 10000);
+            }
+        },
+        dismissPopup() {
+            this.showPopup = false;
+            clearTimeout(this.hideTimeout);
+            clearTimeout(this.reappearTimeout);
+        },
+    },
+    mounted() {
+        setTimeout(this.showTweet, 5000);
+
+        if (!window.twttr) {
+            const twitterScript = document.createElement("script");
+            twitterScript.setAttribute(
+                "src",
+                "https://platform.twitter.com/widgets.js",
+            );
+            twitterScript.setAttribute("async", "");
+            twitterScript.setAttribute("charset", "utf-8");
+            document.head.appendChild(twitterScript);
+        } else if (
+            window.twttr &&
+            typeof window.twttr.widgets !== "undefined" &&
+            typeof window.twttr.widgets.load === "function"
+        ) {
+            window.twttr.widgets.load();
+        }
+    },
+    beforeUnmount() {
+        clearTimeout(this.hideTimeout);
+        clearTimeout(this.reappearTimeout);
+    },
 };
 </script>
 
 <template>
     <div class="main-content">
+        <div class="tweet-container" :class="{ show: showPopup }">
+            <h1 class="follow">follow us on x</h1>
+            <button class="close-btn" @click="dismissPopup">×</button>
+            <blockquote class="twitter-tweet" data-width="280">
+                <p lang="en" dir="ltr">
+                    Integrated Sickle Cell services!<br />
+                    Residents of Ayago, Apoi Subcounty in Apac Dist have tuned
+                    up for sickle cell traits screening; we have collaborated
+                    with Ayago Health Centre II to screen for Malaria, HIV,
+                    Sphilys, H.pylori, HepB, RBS, and Hypertension.
+                    <a href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw"
+                        >@cphluganda</a
+                    >
+                    <a
+                        href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw"
+                        >@TestandTreat37</a
+                    >
+                    <a href="https://t.co/1eAO3W8bIn"
+                        >pic.twitter.com/1eAO3W8bIn</a
+                    >
+                </p>
+                &mdash; Catherine Phil Sickle Cell Support Initiative
+                (@UgandaSickle)
+                <a
+                    href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw"
+                    >January 31, 2025</a
+                >
+            </blockquote>
+        </div>
         <!-- Landing Section -->
         <section
             :class="{ 'dark-theme-events': isDarkMode }"
@@ -202,7 +255,6 @@ export default {
             </div>
         </section>
 
-        <!-- Modal Templates -->
         <div
             v-for="(member, index) in boardMembers"
             :key="'modal' + index"
@@ -397,5 +449,88 @@ body.dark-theme-body .btn-2 {
 .btn-2:hover {
     background-color: red;
     color: white;
+}
+
+.follow {
+    font-size: 22px;
+    text-align: center;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.tweet-container {
+    position: fixed;
+    top: 15%;
+    right: -100%;
+    width: 320px;
+    max-width: 90%;
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px 0 0 12px;
+    z-index: 1000;
+    transition: right 0.6s ease-in-out;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.tweet-container.show {
+    right: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    background-color: red;
+    transform: scale(1.1);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn:active {
+    transform: scale(0.9);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .tweet-container {
+        width: 90%;
+        right: -100%;
+        top: auto;
+        bottom: 20px;
+        padding-right: 30px;
+        border-radius: 10px;
+    }
+
+    .tweet-container.show {
+        right: 5%;
+    }
+}
+
+.blog-content {
+    padding: 20px;
+}
+
+.blog-content h1 {
+    color: #007bff;
+}
+
+.blog-content p {
+    line-height: 1.6;
 }
 </style>

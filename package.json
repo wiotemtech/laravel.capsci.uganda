@@ -21,7 +21,8 @@
         "@fortawesome/fontawesome-free": "^6.7.2",
         "bootstrap": "^5.3.6",
         "quill": "^2.0.3",
-        "sweetalert2": "^11.21.1",
+        "sweetalert2": "^11.22.0",
+        "vue-sweetalert2": "^5.0.11",
         "vue3-quill": "^0.3.1"
     }
 }

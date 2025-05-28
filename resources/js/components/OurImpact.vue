@@ -1,12 +1,15 @@
-<script setup>
-import { ref, onMounted, defineProps } from "vue";
-
-const props = defineProps({
-    isDarkMode: {
-        type: Boolean,
-        default: false,
+<script>
+export default {
+    props: {
+        isDarkMode: {
+            type: Boolean,
+            default: false,
+        },
     },
-});
+};
+</script>
+<script setup>
+import { ref, onMounted } from "vue";
 
 const stats = ref([
     {

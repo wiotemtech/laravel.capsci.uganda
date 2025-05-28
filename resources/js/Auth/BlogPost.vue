@@ -50,7 +50,7 @@ const onEdit = (id) => {
 };
 
 const deleteBlog = (id) => {
-    swal.fire({
+     this.$swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
@@ -63,7 +63,7 @@ const deleteBlog = (id) => {
             axios
                 .delete(`/api/blogs/${id}`)
                 .then(() => {
-                    swal.fire(
+                     this.$swal.fire(
                         "Deleted!",
                         "The blog has been deleted.",
                         "success",
@@ -72,7 +72,7 @@ const deleteBlog = (id) => {
                 })
                 .catch((error) => {
                     console.error("Error deleting blog:", error);
-                    swal.fire("Error!", "Something went wrong.", "error");
+                     this.$swal.fire("Error!", "Something went wrong.", "error");
                 });
         }
     });

@@ -15,7 +15,7 @@ export default {
     const logout = async () => {
       try {
       
-        await fetch("http://localhost:8000/api/logout", {
+        await fetch("/api/logout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -2,7 +2,7 @@
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
-
+import Swal from 'sweetalert2';
 const router = useRouter();
 
 let blogs = ref([]);
@@ -50,7 +50,7 @@ const onEdit = (id) => {
 };
 
 const deleteBlog = (id) => {
-     this.$swal({
+     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
@@ -63,16 +63,16 @@ const deleteBlog = (id) => {
             axios
                 .delete(`/api/blogs/${id}`)
                 .then(() => {
-                     this.$swal({
+                    Swal.fire({
                         icon: "success",
                         title:"Deleted !",
                         text:"The blog has been deleted."
-                     });
+                    });
                     getBlogs();
                 })
                 .catch((error) => {
                     console.error("Error deleting blog:", error);
-                     this.$swal({ icon:"error", title:"Something went wrong.",title:"error"});
+                     Swal.fire({ icon:"error", text:"Something went wrong.",title:"error"});
                 });
         }
     });

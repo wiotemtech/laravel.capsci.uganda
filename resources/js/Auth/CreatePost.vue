@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
-
+import Swal from 'sweetalert2';
 const title = ref("");
 const description = ref("");
 const image = ref(null);
@@ -107,7 +107,7 @@ const handleErrors = (error) => {
     } else {
         console.error("Submission error:", error);
         //alert('Something went wrong!');
-        toast.fire({
+        Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",

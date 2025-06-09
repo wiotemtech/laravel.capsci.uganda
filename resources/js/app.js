@@ -16,7 +16,7 @@ const options = {
   confirmButtonColor: '#41b882',
   cancelButtonColor: '#ff7674',
 };
-app.use(VueSweetalert2,options);
 app.use(router);
+app.use(VueSweetalert2,options);
 
 app.mount("#app");

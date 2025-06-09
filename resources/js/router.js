@@ -29,7 +29,7 @@ const routes = [
   {
     path: "/dashboard",
     component: Dashbord,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
     children: [
       { path: "", component: DashboardWelcome },
       { path: "posts", component: BlogPost },

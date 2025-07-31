@@ -79,26 +79,26 @@ export default {
                     to="/"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Home</router-link
+                    >HOME</router-link
                 >
 
                 <router-link
                     to="/resources"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Resources</router-link
+                    >RESOURCES</router-link
                 >
                 <router-link
                     to="/blogs"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Blogs</router-link
+                    >BLOGS</router-link
                 >
                 <router-link
                     to="/gallery"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Gallery</router-link
+                    >GALLERY</router-link
                 >
                 <div
                     class="dropdown"
@@ -109,7 +109,7 @@ export default {
                         class="dropdown-toggle"
                         :class="{ 'dark-theme-link': isDarkMode }"
                     >
-                        Our Team
+                        OUR TEAM
                     </router-link>
                     <div
                         class="dropdown-content"
@@ -119,13 +119,13 @@ export default {
                             to="/board-members"
                             :class="{ 'dark-theme-link': isDarkMode }"
                             @click.native="closeMenu"
-                            >Board Members</router-link
+                            >BOARD MEMBERS</router-link
                         >
                         <router-link
                             to="/management-members"
                             :class="{ 'dark-theme-link': isDarkMode }"
                             @click.native="closeMenu"
-                            >Management Members</router-link
+                            >MANAGEMENT MEMBERS</router-link
                         >
                     </div>
                 </div>
@@ -134,13 +134,13 @@ export default {
                     to="/events"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Events</router-link
+                    >EVENTS</router-link
                 >
                 <router-link
                     to="/contact-us"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Contact-us</router-link
+                    >CONTACT-US</router-link
                 >
                 <router-link
                     to="jdjdjd"
@@ -148,7 +148,7 @@ export default {
                     :class="{ 'dark-theme-button': isDarkMode }"
                     data-bs-toggle="modal"
                     data-bs-target="#buyKitModal"
-                    >Donate</router-link
+                    >Buy a Kit</router-link
                 >
                 <button
                     @click="toggleTheme"
@@ -377,7 +377,7 @@ body.dark-theme-body .scroll-content {
 
 .header {
     position: fixed;
-    top: 35px;
+    top: 20px;
     left: 0;
     width: 100%;
     padding: 8px 8%;
@@ -408,8 +408,8 @@ body.dark-theme-body .scroll-content {
 .navbar a {
     color: black;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 20px;
     margin-left: 18px;
     transition: color 0.3s ease;
 }

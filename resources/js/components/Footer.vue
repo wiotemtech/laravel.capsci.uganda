@@ -214,7 +214,7 @@ export default {
                 >
                     <a
                         class="twitter-dm-button w3-btn w3-green floating-icon"
-                        href="https://wa.me/256774526849"
+                        href="https://wa.me/256772897869"
                     >
                         <i class="fab fa-whatsapp"></i>
                     </a>

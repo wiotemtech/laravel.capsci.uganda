@@ -153,12 +153,19 @@ onBeforeUnmount(() => {
                 @click.self="closeModal"
             >
                 <div class="modal-content">
+                    <img
+                        v-if="selectedBlog.image"
+                        :src="'/storage/' + selectedBlog.image"
+                        class="modal-blog-image"
+                    />
                     <h2>{{ selectedBlog.title }}</h2>
                     <p>
                         <strong>Published:</strong>
                         {{ formatDate(selectedBlog.created_at) }}
                     </p>
-                    <p class="description">{{ selectedBlog.description }}</p>
+                    <div class="scrollable-description">
+                        <p class="description">{{ selectedBlog.description }}</p>
+                    </div>
                     <button class="close" @click="closeModal">Close</button>
                 </div>
             </div>
@@ -347,10 +354,27 @@ body.dark-theme-body .blog-card {
     background: #394958;
     padding: 40px;
     max-width: 650px;
+    max-height: 80vh; /* Set a max-height for scrollability */
     border-radius: 8px;
     text-align: left;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     animation: fadeIn 0.3s ease-in-out;
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.modal-blog-image {
+    width: 100%;
+    max-height: 250px; /* Adjust as needed */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.scrollable-description {
+    flex-grow: 1; /* Allows it to take available space */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding-right: 10px; /* Add some padding for scrollbar */
 }
 
 .modal-content h2 {
@@ -383,6 +407,7 @@ body.dark-theme-body .blog-card {
     font-size: 0.9rem;
     transition: background-color 0.2s ease-in-out;
     margin-top: 20px;
+    align-self: center; /* Center the close button */
 }
 
 .close:hover {

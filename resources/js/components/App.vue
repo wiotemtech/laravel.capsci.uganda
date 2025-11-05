@@ -6,12 +6,16 @@
     <main class="main-content">
       <!-- Show these only on homepage (/) -->
       <LandingPage v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
-      <understanding-sickle-cell v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
-      <AboutUs v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
-      <OurServices v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
       <OurImpact v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
+      
+      <AboutUs v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
       <FrequentlyAsked v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
+      <!--<OurServices v-if="$route.path === '/'" :isDarkMode="isDarkMode" />-->
+      
+      <part v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
       <Partners v-if="$route.path === '/'" :isDarkMode="isDarkMode" />
+      <!--<PayPalButton v-if="$route.path === '/'" :isDarkMode="isDarkMode" />-->
+      
 
       <!-- All routes (including NotFound or dashboard) render here -->
       <router-view />
@@ -28,10 +32,13 @@ import { computed } from "vue";
 
 import HeaderBanner from "./HeaderBanner.vue";
 import LandingPage from "./LandingPage.vue";
+import OurImpact from "./OurImpact.vue";
+import part from "./part.vue";
+import PayPalButton from "./PayPalButton.vue";
 import UnderstandingSickleCell from "./UnderstandingSickleCell.vue";
 import AboutUs from "./AboutUs.vue";
 import OurServices from "./OurServices.vue";
-import OurImpact from "./OurImpact.vue";
+
 import Partners from "./Partners.vue";
 import FrequentlyAsked from "./FrequentlyAsked.vue";
 import Footer from "./Footer.vue";
@@ -40,13 +47,16 @@ export default {
   components: {
     HeaderBanner,
     LandingPage,
-    UnderstandingSickleCell,
+    OurImpact,
     AboutUs,
     OurServices,
-    OurImpact,
+    part,
+    PayPalButton,
+   
     Partners,
     FrequentlyAsked,
     Footer,
+   
   },
 
   setup() {

@@ -1,204 +1,293 @@
-<script>
-export default {
-    name: "LandingPage",
-    props: {
-        isDarkMode: Boolean,
-    },
-    data() {
-        return {
-            images: ["14.jpg", "s.jpg", "dd.jpg"],
-            texts: [
-                `GIVE HOPE SAVES LIVES <br> "LEAVE NO ONE BEHIND"`,
-                `"COMBATING SICKLE CELL DISEASE" <br> "the best way"`,
-                `"UHURU SICKLE CELL" <br> "RUN 2025 "`,
-            ],
-            currentIndex: 0,
-            textVisible: true,
-        };
-    },
-    mounted() {
-        setInterval(this.changeContent, 5000);
-    },
-    methods: {
-        changeContent() {
-            this.textVisible = false;
-            this.currentIndex = (this.currentIndex + 1) % this.images.length;
-            setTimeout(() => {
-                this.textVisible = true;
-            }, 100);
-        },
-    },
-};
-</script>
-
 <template>
-    <div class="landing-page" :class="{ 'dark-theme-landing': isDarkMode }">
-        <div class="image-container">
-            <img
-                v-for="(img, index) in images"
-                :key="index"
-                :src="`/assets/images/${img}`"
-                :alt="`Image ${index + 1}`"
-                :class="{ active: currentIndex === index }"
-            />
-            <div
-                class="text-overlay"
-                :class="{ show: textVisible, 'dark-theme-text': isDarkMode }"
-                v-html="texts[currentIndex]"
-            ></div>
-        </div>
+    <div class="playyon-page-container">
+        <section class="playyon-hero-section" :style="heroBackgroundStyle">
+            <div class="dark-overlay-extra"></div>
 
-        <div class="card-section">
-            <div class="card" :class="{ 'dark-theme-card': isDarkMode }">
-                <img
-                    src="/public/assets/images/logo1.jpg"
-                    alt=""
-                    style="width: 50px; height: 50px; border-radius: 33px"
-                />
-                <h3 id="kk" :class="{ 'dark-theme-heading': isDarkMode }">
-                   CATHERINE PHIL SICKLE CELL SUPPORT  INITIATIVE.  <br />
-                    "LEAVE NO ONE BEHIND"
-                </h3>
+            <div class="hero-content-container">
+                <div class="hero-text-box">
+                    <h1 class="hero-title">
+                        <span
+                            style="color: white"
+                            class="hero-line new-title-font"
+                        >
+                            Catherine Phill
+                            <span style="color: red">Sickle cell</span>
+                        </span>
+                        <span
+                            style="color: white"
+                            class="hero-line new-title-font"
+                        >
+                            Support Initiative (Capsci-ug)</span
+                        >
+                    </h1>
+
+                    <div class="subtitle-wrapper">
+                        <h5 class="hero-subtitle">
+                            {{ currentSubtitle }}
+                        </h5>
+
+                        <a href="#" class="btn btn-donate">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Donate Now</span>
+                        </a>
+                    </div>
+
+                    <div class="decorative-text"></div>
+                </div>
             </div>
-            <div class="card" :class="{ 'dark-theme-card': isDarkMode }">
-                <h3 :class="{ 'dark-theme-heading': isDarkMode }">
-                    INTRODUCING UHURU SICKLE CELL RUN 2025
-                </h3>
-                <p :class="{ 'dark-theme-paragraph': isDarkMode }">
-                    THEME:<br />Running for awareness, together against sickle
-                    cell
-                </p>
-            </div>
-        </div>
+        </section>
     </div>
 </template>
 
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from "vue";
+
+const heroImages = ref([
+    "/assets/images/s.jpg",
+    "/assets/images/17.jpg",
+    "/assets/images/new.jpeg",
+]);
+
+const heroSubtitles = ref([
+    "Expert training, relentless determination, and boundless compassion.",
+    "Empowering warriors, advocating for change, building a better future.",
+    "Screening, counseling, and support: Integrated Sickle Cell services.",
+]);
+
+const currentImageIndex = ref(0);
+let intervalId = null;
+
+const currentSubtitle = computed(() => {
+    return heroSubtitles.value[currentImageIndex.value];
+});
+
+const heroBackgroundStyle = computed(() => ({
+    backgroundImage: `url(${heroImages.value[currentImageIndex.value]})`,
+}));
+
+const startSlideshow = () => {
+    intervalId = setInterval(() => {
+        currentImageIndex.value =
+            (currentImageIndex.value + 1) % heroImages.value.length;
+    }, 7000);
+};
+
+onMounted(startSlideshow);
+onUnmounted(() => clearInterval(intervalId));
+</script>
+
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Bebas+Neue&display=swap");
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-.landing-page {
-    width: 100%;
-    margin-top: 80px;
+.playyon-page-container {
+    font-family: "Arial", sans-serif;
+    color: var(--color-dark);
+    margin-top: -130px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Hero Section --- */
+.playyon-hero-section {
+    height: 100vh;
+    min-height: 600px;
+    background-color: var(--color-dark);
     position: relative;
     overflow: hidden;
-    background: #f2f2f2;
-    font-family: Arial, sans-serif;
-    transition: background-color 0.3s ease;
+    display: flex;
+    margin-top: 18px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-light);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: scale-zoom 10s infinite alternate ease-in-out;
+    transition: background-image 1.5s ease-in-out;
 }
 
-body.dark-theme-body .landing-page {
-    background: #222;
+@keyframes scale-zoom {
+    0% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-.image-container {
-    width: 100%;
-    height: 60vh;
-    position: relative;
-}
-
-.image-container img {
+/* --- Overlays --- */
+.playyon-hero-section::before {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 60vh;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    z-index: 0;
-}
-
-.image-container img.active {
-    opacity: 1;
+    inset: 0;
     z-index: 1;
+    background: rgba(0, 0, 0, 0.531);
 }
 
-.text-overlay {
+.dark-overlay-extra {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.hero-content-container {
+    position: relative;
+    z-index: 5;
+    max-width: 800px;
+    padding: 20px;
+    margin-top: 300px;
+}
+
+.hero-text-box {
+    padding: 40px;
+}
+
+.hero-title {
+    font-family: "Archivo Black", sans-serif;
+    position: relative;
+    z-index: 6;
+    font-weight: bolder;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+    color: red;
+    text-shadow: 1px 1px 1px rgba(244, 242, 242, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-title .new-title-font {
+    font-family: "Anton", sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+}
+
+.hero-title .hero-line {
+    display: block;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    white-space: nowrap;
+}
+
+.subtitle-wrapper {
+    background-color: rgba(128, 0, 0, 0.8);
+    padding: 10px 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    z-index: 6;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin: 0;
+    padding-bottom: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.btn {
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition:
+        background-color 0.3s,
+        transform 0.2s;
+}
+
+.btn-donate {
+    background-color: white;
+    color: #800000;
+    border: 2px solid #800000;
+    margin-top: 10px;
+}
+
+.btn-donate:hover {
+    background-color: #800000;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.decorative-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -40%);
-    color: white;
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    text-align: center;
-    opacity: 0;
-    z-index: 2;
-    transition:
-        opacity 0.8s ease-in-out,
-        transform 0.8s ease-in-out,
-        color 0.3s ease;
-    line-height: 1.4;
-    font-weight: bold;
-}
-
-.text-overlay.show {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-}
-
-body.dark-theme-body .text-overlay {
-    color: white;
-}
-
-.card-section {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: -6rem;
-    position: relative;
+    transform: translate(-50%, -50%) rotate(0deg);
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px white;
+    text-stroke: 2px white;
+    white-space: nowrap;
     z-index: 3;
-    padding: 2rem;
-    flex-wrap: wrap;
-}
-
-.card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    user-select: none;
+    pointer-events: none;
     text-align: center;
-    transition:
-        transform 0.3s ease,
-        background-color 0.3s ease,
-        color 0.3s ease;
-    position: relative;
 }
 
-body.dark-theme-body .card {
-    background: #222;
-    border: 1px solid red;
-    color: #333;
+@media (max-width: 767px) {
+    .hero-content-container {
+        width: 90%;
+        padding: 0 10px;
+        margin: 200px auto 0;
+    }
+
+    .hero-title .hero-line {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .subtitle-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .subtitle-wrapper .btn-donate {
+        width: 100%;
+        max-width: 300px;
+        margin: 10px auto 0;
+    }
+
+    .playyon-hero-section {
+        margin-top: 130px;
+    }
 }
 
-.card:hover {
-    transform: translateY(-10px);
-}
-
-.card h3 {
-    margin-bottom: 0.5rem;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    transition: color 0.3s ease;
-}
-
-body.dark-theme-body .card h3 {
-    color: white;
-}
-
-.card p {
-    font-size: 20px;
-    color: red;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-body.dark-theme-body .card p {
-    color: red;
+@media (max-width: 500px) {
+    .decorative-text {
+        white-space: normal;
+        line-height: 1.1;
+        letter-spacing: 0.05em;
+        font-size: clamp(2rem, 10vw, 4rem);
+        padding: 0 10px;
+    }
 }
 </style>

@@ -8,6 +8,7 @@ export default {
     },
     setup() {
         const activeItem = ref(null);
+
         const faqItems = ref([
             {
                 question: "What is sickle cell disease?",
@@ -74,15 +75,18 @@ export default {
             setTimeout(showTweet, 5000);
 
             if (!window.twttr) {
-                const twitterScript = document.createElement('script');
-                twitterScript.setAttribute('src', 'https://platform.twitter.com/widgets.js');
-                twitterScript.setAttribute('async', '');
-                twitterScript.setAttribute('charset', 'utf-8');
+                const twitterScript = document.createElement("script");
+                twitterScript.setAttribute(
+                    "src",
+                    "https://platform.twitter.com/widgets.js",
+                );
+                twitterScript.setAttribute("async", "");
+                twitterScript.setAttribute("charset", "utf-8");
                 document.head.appendChild(twitterScript);
             } else if (
                 window.twttr &&
-                typeof window.twttr.widgets !== 'undefined' &&
-                typeof window.twttr.widgets.load === 'function'
+                typeof window.twttr.widgets !== "undefined" &&
+                typeof window.twttr.widgets.load === "function"
             ) {
                 window.twttr.widgets.load();
             }
@@ -104,96 +108,79 @@ export default {
 };
 </script>
 
-
 <template>
     <div class="asked_main" :class="{ 'dark-theme-asked_main': isDarkMode }">
-        <div class="tweet-container" :class="{ 'show': showPopup }">
-                <h1 class="follow">follow us on x</h1>
-                <button class="close-btn" @click="dismissPopup">×</button>
-                <blockquote class="twitter-tweet" data-width="280">
-                    <p lang="en" dir="ltr">
-                        Integrated Sickle Cell services!<br />
-                        Residents of Ayago, Apoi Subcounty in Apac Dist have tuned up for sickle cell traits screening; we have collaborated
-                        with Ayago Health Centre II to screen for Malaria, HIV, Sphilys, H.pylori, HepB, RBS, and Hypertension.
-                        <a href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw">@cphluganda</a>
-                        <a href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw">@TestandTreat37</a>
-                        <a href="https://t.co/1eAO3W8bIn">pic.twitter.com/1eAO3W8bIn</a>
-                    </p>
-                    &mdash; Catherine Phil Sickle Cell Support Initiative (@UgandaSickle)
-                    <a href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw">January 31, 2025</a>
-                </blockquote>
-            </div>
+        <div class="tweet-container" :class="{ show: showPopup }">
+            <h1 class="follow">follow us on x</h1>
+            <button class="close-btn" @click="dismissPopup">×</button>
+            <blockquote class="twitter-tweet" data-width="280">
+                <p lang="en" dir="ltr">
+                    Integrated Sickle Cell services!<br />
+                    Residents of Ayago, Apoi Subcounty in Apac Dist have tuned
+                    up for sickle cell traits screening; we have collaborated
+                    with Ayago Health Centre II to screen for Malaria, HIV,
+                    Sphilys, H.pylori, HepB, RBS, and Hypertension.
+                    <a href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw"
+                        >@cphluganda</a
+                    >
+                    <a
+                        href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw"
+                        >@TestandTreat37</a
+                    >
+                    <a href="https://t.co/1eAO3W8bIn"
+                        >pic.twitter.com/1eAO3W8bIn</a
+                    >
+                </p>
+                &mdash; Catherine Phil Sickle Cell Support Initiative
+                (@UgandaSickle)
+                <a
+                    href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw"
+                    >January 31, 2025</a
+                >
+            </blockquote>
+        </div>
+
         <div class="container">
-            <h1 class="faq-h1" :class="{ 'dark-theme-faq-h1': isDarkMode }">
+            <h2 class="about-us-title">Explore</h2>
+            <h1
+                class="about-us-subtitle"
+                :class="{ 'dark-theme-faq-h1': isDarkMode }"
+            >
                 Frequently Asked Questions
             </h1>
             <div class="faq-row">
-              
-                <div
-                    class="faq-image-col"
-                    :class="{ 'dark-theme-faq-image-col': isDarkMode }"
-                >
-                    <div class="ask_img">
-                        <figure>
-                            <img
-                                src="/public/assets/images/about.jpg"
-                                alt="FAQ Image"
-                                class="faq-image"
-                                :class="{ 'dark-theme-faq-image': isDarkMode }"
-                            />
-                        </figure>
-                    </div>
-                </div>
-
-       
-                <div
-                    class="faq-content-col"
-                    :class="{ 'dark-theme-faq-content-col': isDarkMode }"
-                >
-                    <div
-                        class="ask_box"
-                        :class="{ 'dark-theme-ask_box': isDarkMode }"
-                    >
+                <div class="faq-content-col">
+                    <div class="accordion" id="faqAccordion">
                         <div
-                            class="simpaly"
+                            class="accordion-item my-3 custom-accordion-item"
                             v-for="(item, index) in faqItems"
                             :key="index"
-                            :class="{ 'dark-theme-simpaly': isDarkMode }"
                         >
-                            <div
-                                class="slider"
-                                @click="toggleItem(index)"
-                                :class="{
-                                    'dark-theme-slider': isDarkMode,
-                                    active: activeItem === index,
-                                }"
-                            >
-                                <span>+</span>
-                                <a
-                                    href="#"
-                                    @click.prevent="toggleItem(index)"
-                                    class="faq-question-link"
-                                    :class="{
-                                        'dark-theme-faq-question-link':
-                                            isDarkMode,
-                                    }"
+                            <h2 class="accordion-header">
+                                <button
+                                    class="accordion-button custom-accordion-button"
+                                    type="button"
+                                    @click="toggleItem(index)"
+                                    :class="{ collapsed: activeItem !== index }"
+                                    :aria-expanded="
+                                        activeItem === index ? 'true' : 'false'
+                                    "
                                 >
                                     {{ item.question }}
-                                </a>
-                            </div>
+                                </button>
+                            </h2>
                             <div
-                                class="content"
-                                :class="{
-                                    'dark-theme-content': isDarkMode,
-                                    active: activeItem === index,
-                                }"
+                                :id="`collapse${index}`"
+                                class="accordion-collapse"
+                                :class="{ show: activeItem === index }"
                             >
-                                <p
-                                    class="faq-p"
-                                    :class="{ 'dark-theme-faq-p': isDarkMode }"
+                                <div
+                                    class="accordion-body custom-accordion-body"
                                 >
-                                    <span v-html="item.answer"></span>
-                                </p>
+                                    <p class="faq-p">
+                                        <span v-html="item.answer"></span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,21 +191,49 @@ export default {
 </template>
 
 <style scoped>
-.asked_main {
-    background-color: #2c3e50;
-    padding: 0px 0;
-}
-
-body.dark-theme-body .asked_main {
-    background-color: #222;
+.about-us-title {
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-family: "Oswald";
     color: red;
+    margin-bottom: 10px;
 }
 
-.container {
-    max-width: 1900px;
-    margin: auto;
-    padding: 0 20px;
+.about-us-subtitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
+
+.asked_main {
+    background-image: url("/public/assets/images/new.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 0px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.asked_main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(44, 62, 80, 0.7);
+    z-index: -1;
+}
+
+body.dark-theme-body .asked_main::before {
+    background-color: rgba(34, 34, 34, 0.8);
+}
+
 .faq-h1 {
     font-family: "Poppins", sans-serif;
     font-size: 30px;
@@ -229,96 +244,20 @@ body.dark-theme-body .asked_main {
     font-weight: 600;
 }
 
-body.dark-theme-body .faq-h1 {
-    color: white;
-}
 .faq-row {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 30px;
+    padding-bottom: 50px;
 }
-.faq-image-col {
-    flex: 1 1 40%;
-    padding: 25px;
-    border-radius: 10px;
-}
-.ask_img {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.faq-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-.faq-desc {
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-}
+
 .faq-content-col {
-    flex: 1 1 55%;
+    flex: 0 1 700px;
+    max-width: 90%;
     padding: 10px;
 }
-.simpaly {
-    margin-bottom: 20px;
-    border-bottom: 1px solid red;
-}
-.slider {
-    cursor: pointer;
-    padding: 8px 10px;
-    background-color: #f1f1f1;
-    color: red;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    justify-content: space-between;
-    width: 100%;
-}
 
-body.dark-theme-body .slider {
-    background-color: #222;
-    border: 1px solid red;
-    color: white;
-}
-.slider:hover {
-    background-color: rgb(98, 31, 31);
-    color: white;
-}
-.slider span {
-    font-size: 1.2rem;
-    margin-right: 10px;
-}
-.faq-question-link {
-    text-decoration: none;
-    color: inherit;
-    font-family: "Poppins", sans-serif;
-    font-size: 1.1rem;
-    flex-grow: 1;
-    margin-left: 10px;
-}
-.content {
-    max-height: 0;
-    overflow: hidden;
-    transition:
-        max-height 0.4s ease,
-        padding 0.3s ease;
-    padding: 0 0px;
-    border-left: 1px solid red;
-}
-
-body.dark-theme-body .content {
-    border-left: 1px solid white;
-    color: red;
-}
-.content.active {
-    max-height: 560px;
-    padding: 8px;
-}
 .faq-p {
     font-family: "Poppins", sans-serif;
     font-size: 18px;
@@ -332,14 +271,99 @@ body.dark-theme-body .content {
     margin-top: 10px;
 }
 
-@media (max-width: 768px) {
-    .faq-row {
-        flex-direction: column;
-    }
-    .faq-image-col,
-    .faq-content-col {
-        flex: 1 1 100%;
-    }
+.accordion {
+    --bs-accordion-border-width: 0;
+    --bs-accordion-bg: transparent;
+}
+
+.custom-accordion-item {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    border-bottom: 1px solid red !important;
+}
+
+.custom-accordion-button {
+    background-color: #f1f1f1;
+    color: red;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    box-shadow: none !important;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-accordion-button:not(.collapsed) {
+    background-color: rgb(98, 31, 31);
+    color: white;
+}
+
+.custom-accordion-button::after {
+    background-image: none;
+    content: "+";
+    font-size: 1.5rem;
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-accordion-button:not(.collapsed)::after {
+    content: "—";
+    transform: rotate(0deg);
+}
+
+.custom-accordion-button:hover {
+    background-color: rgb(98, 31, 31);
+    color: white;
+}
+
+.custom-accordion-body {
+    background-color: transparent;
+    border-left: 1px solid red;
+    padding: 10px 15px;
+    overflow: hidden;
+}
+
+.accordion-collapse {
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+.accordion-collapse.show {
+    max-height: 500px;
+}
+
+.dark-theme-faq-content-col .custom-accordion-item {
+    border-bottom: 1px solid white !important;
+}
+
+.dark-theme-faq-content-col .custom-accordion-button {
+    background-color: #222;
+    border: 1px solid red;
+    color: white;
+}
+
+.dark-theme-faq-content-col .custom-accordion-button:hover {
+    background-color: red;
+    color: white;
+}
+
+.dark-theme-faq-content-col .custom-accordion-button:not(.collapsed) {
+    background-color: red;
+    color: white;
+}
+
+.dark-theme-faq-content-col .custom-accordion-body {
+    border-left: 1px solid white;
 }
 
 .follow {
@@ -393,36 +417,23 @@ body.dark-theme-body .content {
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
-.close-btn:active{
+.close-btn:active {
     transform: scale(0.9);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3)
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-
 
 @media (max-width: 600px) {
-  .tweet-container {
-    width: 90%;
-    right: -100%;
-    top: auto;
-    bottom: 20px;
-    padding-right: 30px;
-    border-radius: 10px;
-  }
+    .tweet-container {
+        width: 90%;
+        right: -100%;
+        top: auto;
+        bottom: 20px;
+        padding-right: 30px;
+        border-radius: 10px;
+    }
 
-  .tweet-container.show {
-    right: 5%;
-  }
-}
-
-.blog-content {
-    padding: 20px;
-}
-
-.blog-content h1 {
-  color: #007bff;
-}
-
-.blog-content p {
-  line-height: 1.6;
+    .tweet-container.show {
+        right: 5%;
+    }
 }
 </style>

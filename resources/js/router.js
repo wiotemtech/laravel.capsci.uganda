@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import About from "./views/Resources.vue";
+
 import Blogs from "./views/Blogs.vue";
 import Gallery from "./views/Gallery.vue";
 import BordMembers from "./views/BoardMembers.vue";
@@ -15,6 +15,9 @@ import BlogPost from "./Auth/BlogPost.vue";
 import DashboardWelcome from "./Auth/DashboardWelcome.vue";
 import CreatePost from "./Auth/CreatePost.vue";
 import LogIn from "./Auth/LogIn.vue";
+import BlogDetail from "./views/BlogDetail.vue";
+import About from "./views/About.vue";
+
 
 const routes = [
   { path: "/", component: HeaderBanner },
@@ -25,6 +28,8 @@ const routes = [
   { path: "/management-members", component: ManagementMembers },
   { path: "/events", component: Events },
   { path: "/contact-us", component: Contact },
+  { path: "/blogs/:id", name: "blogs.detail", component: BlogDetail },
+  { path: "/about", name:"about", component: About},
 
   {
     path: "/dashboard",

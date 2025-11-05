@@ -1,220 +1,268 @@
-<script>
-export default {
-    name: "ServicesSection",
-    props: {
-        isDarkMode: Boolean,
-    },
-};
-</script>
-
 <template>
-    <section
-        class="ercdv-services"
-        :class="{ 'dark-theme-service': isDarkMode }"
-    >
-        <h1 :class="{ 'dark-theme-service': isDarkMode }">What We Do</h1>
-        <div
-            class="ercdv-container"
-            :class="{ 'dark-theme-service': isDarkMode }"
-        >
+    <div class="erc-core-values">
+        <div class="erc-header">
+            <h3 class="about-us-title">Our Services</h3>
+            <h4 class="about-us-subtitle">Together, we fight sickle cell</h4>
+        </div>
+
+        <div class="erc-values-grid">
             <div
-                class="ercdv-service-grid"
-                :class="{ 'dark-theme-service': isDarkMode }"
+                v-for="(value, index) in coreValues"
+                :key="index"
+                :class="[
+                    'erc-value-card',
+                    value.cssClass,
+                    { 'is-visible': visibleCards.includes(index) },
+                ]"
+                :style="{ transitionDelay: `${index * 150}ms` }"
+                ref="cards"
             >
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-book"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Counseling
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We provide genetic counseling, testing services, and
-                        family counseling.
-                    </p>
+                <div class="erc-value-content">
+                    <div
+                        class="erc-icon-container"
+                        :style="{ borderColor: value.iconColor }"
+                    >
+                        {{ value.icon }}
+                    </div>
+                    <div class="erc-title-container">
+                        <h3>{{ value.title }}</h3>
+                    </div>
                 </div>
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-laptop-medical"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Clinical Services
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We offer referrals to our warriors through partner
-                        hospitals.
-                    </p>
-                </div>
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-users"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Outreaches
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We conduct outreach programs to educate about SCD in
-                        Uganda.
-                    </p>
-                </div>
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-bullhorn"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Advocacy
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We advocate for policy changes to improve the rights of
-                        individuals with SCD.
-                    </p>
-                </div>
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-hands-helping"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Capacity Building
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We collaborate with healthcare providers to improve SCD
-                        management.
-                    </p>
-                </div>
-                <div
-                    class="ercdv-service-card"
-                    :class="{ 'dark-theme-service': isDarkMode }"
-                >
-                    <i class="fas fa-flask"></i>
-                    <h3 :class="{ 'dark-theme-service': isDarkMode }">
-                        Research
-                    </h3>
-                    <p :class="{ 'dark-theme-service': isDarkMode }">
-                        We conduct research on SCD to inform policy and improve
-                        interventions.
-                    </p>
-                </div>
+                <p>{{ value.description }}</p>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from "vue";
+
+const coreValues = ref([
+    {
+        title: "Clinical Services",
+        description:
+            "We offer referrals to our warriors through partner hospitals.",
+        icon: "🏥",
+
+        cssClass: "card-bg-dark-gray card-icon-maroon",
+        iconColor: "#800000",
+    },
+    {
+        title: "Counseling",
+        description:
+            "We provide genetic counseling, testing services, and family counseling.",
+        icon: "🫂",
+
+        cssClass: "card-bg-maroon card-icon-white",
+        iconColor: "#ffffff",
+    },
+    {
+        title: "Outreaches",
+        description:
+            "We conduct outreach programs to educate about SCD in Uganda.",
+        icon: "🗺️",
+
+        cssClass: "card-bg-red card-icon-white",
+        iconColor: "#ffffff",
+    },
+    {
+        title: "Advocay",
+        description:
+            "We advocate for policy changes to improve the rights of individuals with SCD.",
+        icon: "📢",
+
+        cssClass: "card-bg-dark-gray card-icon-maroon",
+        iconColor: "#800000",
+    },
+    {
+        title: "Capacity Building",
+        description:
+            "We collaborate with healthcare providers to improve SCD management.",
+        icon: "🧠",
+
+        cssClass: "card-bg-maroon card-icon-white",
+        iconColor: "#ffffff",
+    },
+    {
+        title: "Research",
+        description:
+            "We conduct research on SCD to inform policy and improve interventions.",
+        icon: "🔬",
+
+        cssClass: "card-bg-red card-icon-white",
+        iconColor: "#ffffff",
+    },
+]);
+
+const visibleCards = ref([]);
+const cards = ref([]);
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = [...cards.value].indexOf(entry.target);
+                    if (!visibleCards.value.includes(index)) {
+                        visibleCards.value.push(index);
+                    }
+                }
+            });
+        },
+        { threshold: 0.2 },
+    );
+
+    cards.value.forEach((card) => {
+        if (card) observer.observe(card);
+    });
+});
+</script>
+
 <style scoped>
-.ercdv-services {
-    text-align: center;
-    margin-top: 0px;
-
-    background: linear-gradient(to top, rgb(232, 167, 167), white);
-    color: #fff;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-}
-
-body.dark-theme-body .ercdv-services {
-    background: linear-gradient(to top, #222, #222);
-    color: red;
-}
-
-.ercdv-services h1 {
-    font-size: 30px;
-    font-family: "poppins", sans-serif;
+.about-us-title {
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 25px;
-    color: red;
-}
-body.dark-theme-body .ercdv-services h1 {
-    color: white;
-}
-
-.ercdv-container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 0 20px;
-}
-
-.ercdv-service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.ercdv-service-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: left;
-    transition: transform 0.3s ease-in-out;
-    height: 220px;
-    overflow: hidden;
-}
-
-body.dark-theme-body .ercdv-service-card {
-    background: linear-gradient(to top, #222, #222);
-    border: 1px solid red;
-    color: red;
-}
-
-.ercdv-service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.ercdv-service-card i {
-    font-size: 2rem;
     color: red;
     margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 50%;
-    transition:
-        transform 0.3s ease-in-out,
-        background-color 0.3s ease-in-out;
 }
 
-.ercdv-service-card:hover i {
-    transform: rotate(360deg);
-    background-color: red;
-    color: #fff;
+.about-us-subtitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(128, 0, 0, 0.8);
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
 
-.ercdv-service-card h3 {
-    font-size: 20px;
-    font-family: "poppins", sans-serif;
-    color: black;
-    margin-bottom: 8px;
+body {
+    background-color: var(--section-bg);
+    margin: 0;
+    padding: 0;
 }
 
-body.dark-theme-body .ercdv-service-card h3 {
-    background: linear-gradient(to top, #222, #222);
-
-    color: whitesmoke;
+.erc-core-values {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
 }
 
-.ercdv-service-card p {
-    font-size: 16px;
-    font-family: "poppins", sans-serif;
-    color: #6c757d;
-    line-height: 1.3;
+.erc-header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
-body.dark-theme-body .ercdv-service-card p {
-    color: white smoke;
+.erc-values-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(1, 1fr);
 }
 
-@media (max-width: 600px) {
-    .ercdv-services h1 {
-        font-size: 1.8rem;
+@media (min-width: 768px) {
+    .erc-values-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .ercdv-service-card {
-        height: auto;
+@media (min-width: 1024px) {
+    .erc-values-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.erc-value-card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 0.75rem;
+
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    color: var(--light-gray-text);
+}
+
+body.dark-theme-body .erc-value-card {
+    background-color: #222;
+    border-top: 1px solid var(--maroon-primary);
+    color: var(--light-gray-text);
+}
+
+.erc-value-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.erc-value-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 4px;
+    background: var(--maroon-primary);
+    transition: left 0.6s ease;
+}
+
+.erc-value-card:hover::before {
+    left: 0;
+}
+
+.erc-value-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 18px 30px -6px rgba(0, 0, 0, 0.5);
+}
+
+.erc-value-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.erc-icon-container {
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    border: 2px solid;
+    flex-shrink: 0;
+    background-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.erc-value-card:hover .erc-icon-container {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.erc-title-container h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: red;
+    margin-top: 0.25rem;
+}
+
+.card-bg-dark-gray {
+    background-color: rgb(215, 173, 173);
+}
+.card-bg-maroon {
+    background-color: rgb(153, 153, 225);
+}
+.card-bg-red {
+    background-color: var(--deep-red);
+}
+
+.card-icon-maroon .erc-icon-container {
+    background-color: rgba(128, 0, 0, 0.2);
+}
+.card-icon-white .erc-icon-container {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.erc-value-card p {
+    color: var(--light-gray-text);
 }
 </style>

@@ -1,312 +1,507 @@
-<script>
-export default {
-    data() {
-        return {
-            isDarkMode: false,
-            showPopup: false,
-            shownOnce: false,
-            hideTimeout: null,
-            reappearTimeout: null,
-            socialIcons: [
-                "fab fa-facebook",
-                "fab fa-twitter",
-                "fab fa-linkedin",
-            ],
-            boardMembers: [
-                {
-                    name: "Dr. Alex Riolexus Ario",
-                    title: "Board Chairman",
-                    bio: `MD, PhD, is a Medical Doctor and Public Health Specialist with extensive knowledge in epidemiology, health policy, management and planning, health systems reform and quality improvement models for health service delivery. He's the Director of Public Health Institute of Uganda`,
-                    image: "/assets/images/Alex Riolexus Ario.jpeg",
-                    modalId: "#bioModal1",
-                    modalLabelId: "bioModal1Label",
-                    cardClass: "top",
-                    cardId: "card1",
-                    nameStyle: {},
-                },
-                {
-                    name: "Dr. Diana Antonia Rutebarika",
-                    title: "Vice Chairperson Of the Board",
-                    bio: `Diana Rutebarika is the Head of Paediatrics at Joint Clinical Research Centre. Attained her bachelor's degree from Makerere University; postgraduate Paediatric studies from Sydney (Children’s Hospital at Westmead)...`,
-                    image: "/assets/images/Diana Antonia Rutebarika.jpeg",
-                    modalId: "#bioModal2",
-                    modalLabelId: "bioModal2Label",
-                    cardClass: "right",
-                    cardId: "card2",
-                    nameStyle: {},
-                },
-                {
-                    name: "Ms. Namutebi Ritah",
-                    title: "Board Secretary",
-                    bio: "Ritah holds a degree in Actuarial Science and a Post-Graduate Diploma in Project Planning and Management...",
-                    image: "/assets/images/Namutebi Ritah.jpeg",
-                    modalId: "#bioModal3",
-                    modalLabelId: "bioModal3Label",
-                    cardClass: "bottom",
-                    cardId: "card3",
-                    nameStyle: {},
-                },
-                {
-                    name: "Mr. Justine Okodi",
-                    title: "Board Treasurer",
-                    bio: "",
-                    image: "/assets/images/logo1.png",
-                    modalId: "#bioModal4",
-                    modalLabelId: "bioModal4Label",
-                    cardClass: "left",
-                    cardId: "card4",
-                    nameStyle: {},
-                },
-                {
-                    name: "Ms. Odongo Harriet Namissi",
-                    title: "Board Member",
-                    bio: "",
-                    image: "/assets/images/logo1.png",
-                    modalId: "#bioModal5",
-                    modalLabelId: "bioModal5Label",
-                    cardClass: "right",
-                    cardId: "card5",
-                    nameStyle: {},
-                },
-                {
-                    name: "Mr. Odur Daniel Roy",
-                    title: "Board Member",
-                    bio: "",
-                    image: "/assets/images/logo1.png",
-                    modalId: "#bioModal6",
-                    modalLabelId: "bioModal6Label",
-                    cardClass: "top",
-                    cardId: "card6",
-                    nameStyle: { color: "gray" },
-                },
-                {
-                    name: "Dr. Odur Andrew",
-                    title: "Technical Advisor",
-                    bio: "",
-                    image: "/assets/images/logo1.png",
-                    modalId: "#bioModal7",
-                    modalLabelId: "bioModal7Label",
-                    cardClass: "top",
-                    cardId: "card7",
-                    nameStyle: { color: "gray" },
-                },
-                {
-                    name: "Dr. Deogratias Munube",
-                    title: "Board Member",
-                    bio: "",
-                    image: "/assets/images/logo1.png",
-                    modalId: "#bioModal8",
-                    modalLabelId: "bioModal8Label",
-                    cardClass: "top",
-                    cardId: "card8",
-                    nameStyle: {},
-                },
-            ],
-        };
-    },
-    methods: {
-        showTweet() {
-            if (!this.shownOnce) {
-                this.showPopup = true;
-                this.shownOnce = true;
-
-                this.hideTimeout = setTimeout(() => {
-                    this.showPopup = false;
-
-                    this.reappearTimeout = setTimeout(() => {
-                        this.showPopup = true;
-                    }, 10000);
-                }, 10000);
-            }
-        },
-        dismissPopup() {
-            this.showPopup = false;
-            clearTimeout(this.hideTimeout);
-            clearTimeout(this.reappearTimeout);
-        },
-    },
-    mounted() {
-        setTimeout(this.showTweet, 5000);
-
-        if (!window.twttr) {
-            const twitterScript = document.createElement("script");
-            twitterScript.setAttribute(
-                "src",
-                "https://platform.twitter.com/widgets.js",
-            );
-            twitterScript.setAttribute("async", "");
-            twitterScript.setAttribute("charset", "utf-8");
-            document.head.appendChild(twitterScript);
-        } else if (
-            window.twttr &&
-            typeof window.twttr.widgets !== "undefined" &&
-            typeof window.twttr.widgets.load === "function"
-        ) {
-            window.twttr.widgets.load();
-        }
-    },
-    beforeUnmount() {
-        clearTimeout(this.hideTimeout);
-        clearTimeout(this.reappearTimeout);
-    },
-};
-</script>
-
 <template>
-    <div class="main-content">
-        <div class="tweet-container" :class="{ show: showPopup }">
-            <h1 class="follow">follow us on x</h1>
-            <button class="close-btn" @click="dismissPopup">×</button>
-            <blockquote class="twitter-tweet" data-width="280">
-                <p lang="en" dir="ltr">
-                    Integrated Sickle Cell services!<br />
-                    Residents of Ayago, Apoi Subcounty in Apac Dist have tuned
-                    up for sickle cell traits screening; we have collaborated
-                    with Ayago Health Centre II to screen for Malaria, HIV,
-                    Sphilys, H.pylori, HepB, RBS, and Hypertension.
-                    <a href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw"
-                        >@cphluganda</a
-                    >
-                    <a
-                        href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw"
-                        >@TestandTreat37</a
-                    >
-                    <a href="https://t.co/1eAO3W8bIn"
-                        >pic.twitter.com/1eAO3W8bIn</a
-                    >
-                </p>
-                &mdash; Catherine Phil Sickle Cell Support Initiative
-                (@UgandaSickle)
-                <a
-                    href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw"
-                    >January 31, 2025</a
-                >
-            </blockquote>
-        </div>
+    <div>
         <section
             :class="{ 'dark-theme-events': isDarkMode }"
-            style="background-image: url(&quot;/assets/images/14.jpg&quot;)"
+            style="background-image: url(&quot;/assets/images/11.jpg&quot;)"
             class="landing-section"
         >
             <div class="overlay"></div>
-            <div class="landing-content animated-text">
-                <h1>Our Team</h1>
-                <p class="subtitle">"Leave No One Behind"</p>
+            <div class="landing-content">
+                <h1>/ Our Team</h1>
+
+                <h1>Welcome to our Team page</h1>
             </div>
         </section>
 
-        <section
-            :class="{ 'dark-theme-events': isDarkMode }"
-            class="container team-section"
-        >
-            <h2 class="text-center mb-4 section-heading">OUR BOARD MEMBERS</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                <div
-                    v-for="(member, index) in boardMembers"
-                    :key="index"
-                    class="col"
-                    :style="{ animationDelay: `${index * 0.1}s` }"
+        <section class="team-section">
+            <h2>Meet Our Team</h2>
+            <p>
+                Dedicated professionals working together to achieve excellence.
+            </p>
+
+            <div class="team-view-toggle">
+                <button
+                    :class="{ active: currentView === 'Board' }"
+                    @click="toggleView('Board')"
                 >
-                    <div
-                        class="card team-card shadow"
-                        :class="member.cardClass"
-                        :id="member.cardId"
-                    >
-                        <img
-                            :src="member.image"
-                            class="card-img-top mx-auto mt-4"
-                            :alt="member.name"
-                        />
-                        <div class="card-body text-center">
-                            <h5 class="card-title" :style="member.nameStyle">
-                                {{ member.name }}
-                            </h5>
-                            <p class="card-text">{{ member.title }}</p>
-                            <div class="social-icons mt-2">
-                                <a
-                                    v-for="icon in socialIcons"
-                                    :key="icon"
-                                    href="#"
-                                    :class="icon"
-                                    data-bs-toggle="tooltip"
-                                    :title="icon.split('-')[2]"
-                                ></a>
-                            </div>
-                            <button
-                                class="btn-2 mt-3"
-                                data-bs-toggle="modal"
-                                :data-bs-target="member.modalId"
-                            >
-                                Learn More
-                            </button>
-                        </div>
+                    Board Members
+                </button>
+                <button
+                    :class="{ active: currentView === 'Management' }"
+                    @click="toggleView('Management')"
+                >
+                    Management Team
+                </button>
+            </div>
+
+            <div class="team-cards">
+                <div
+                    class="team-card"
+                    v-for="member in displayedMembers"
+                    :key="member.id"
+                    data-aos="fade-up"
+                    :data-aos-delay="member.aosDelay"
+                >
+                    <img :src="member.image" :alt="member.name" />
+                    <h3>{{ member.name }}</h3>
+                    <p>{{ member.title }}</p>
+                    <div class="social-icons">
+                        <a
+                            v-if="member.social.linkedin"
+                            :href="member.social.linkedin"
+                            target="_blank"
+                            ><i class="fab fa-linkedin-in"></i
+                        ></a>
+                        <a
+                            v-if="member.social.twitter"
+                            :href="member.social.twitter"
+                            target="_blank"
+                            ><i class="fab fa-twitter"></i
+                        ></a>
+                        <a
+                            v-if="member.social.facebook"
+                            :href="member.social.facebook"
+                            target="_blank"
+                            ><i class="fab fa-facebook-f"></i
+                        ></a>
+
+                        <a
+                            v-if="member.social.instagram"
+                            :href="member.social.instagram"
+                            target="_blank"
+                            ><i class="fab fa-instagram"></i
+                        ></a>
+                        <a
+                            v-if="member.social.github"
+                            :href="member.social.github"
+                            target="_blank"
+                            ><i class="fab fa-github"></i
+                        ></a>
+                    </div>
+                    <button class="view-profile-btn" @click="openModal(member)">
+                        View Profile
+                    </button>
+                </div>
+            </div>
+
+            <div v-if="isModalOpen" class="modal" @click.self="closeModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>{{ selectedMember.name }}</h2>
+                        <span class="close" @click="closeModal">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ selectedMember.bio }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="close-modal-btn" @click="closeModal">
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
-
-        <div
-            v-for="(member, index) in boardMembers"
-            :key="'modal' + index"
-            class="modal fade"
-            :id="member.modalId.replace('#', '')"
-            tabindex="-1"
-            aria-labelledby="member.modalLabelId"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog b">
-                <div
-                    :class="{ 'dark-theme-events': isDarkMode }"
-                    class="modal-content"
-                >
-                    <div class="modal-header b">
-                        <h5 class="modal-title" :id="member.modalLabelId">
-                            {{ member.name }}
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div
-                        :class="{ 'dark-theme-events': isDarkMode }"
-                        class="modal-body"
-                    >
-                        <h6 class="mb-2">{{ member.title }}</h6>
-                        <p>{{ member.bio }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const boardMembers = ref([
+    {
+        id: 1,
+        name: "Dr. Alex Riolexus Ario",
+        title: "Board Chairperson",
+        image: "/assets/images/robert.png",
+        bio: `Dr. Alex Riolexus Ario, MD, PhD, is a Medical Doctor and Public Health Specialist with extensive knowledge in epidemiology, health policy, management and planning, health systems reform and quality improvement models for health service delivery. He's the Director of Public Health Institute of Uganda.`,
+        social: {
+            linkedin: "",
+            twitter: "#",
+            facebook: "https://www.facebook.com/robertrapsy.ogwang",
+            instagram:
+                "https://www.instagram.com/rapsyrobert?igsh=YzljYTk1ODg3Zg==",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 2,
+        name: "Dr. Diana Antonia Rutebarika",
+        title: "Vice Chairperson",
+        image: "/assets/images/bara.jpg",
+        bio: `Vice Chairperson Of the Board. Diana Rutebarika is the Head of Paediatrics at Joint Clinical Research Centre. Attained her bachelor's degree from Makerere University; postgraduate Paediatric studies from Sydney (Children’s Hospital at Westmead)...`,
+        social: {
+            linkedin:
+                "https://www.linkedin.com/in/babra-adiama-akello?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            twitter: "#",
+            facebook: "https://www.facebook.com/adiama.babra.39",
+            instagram:
+                "https://www.instagram.com/babra.adiama?igsh=YzljYTk1ODg3Zg==",
+        },
+        aosDelay: 100,
+    },
+    {
+        id: 3,
+        name: "Ms. Namutebi Ritah",
+        title: "Board Secretary",
+        image: "/assets/images/jas.jpg",
+        bio: `Board Secretary. Ritah holds a degree in Actuarial Science and a Post-Graduate Diploma in Project Planning and Management...`,
+        social: {
+            linkedin:
+                "https://www.linkedin.com/in/jaspher-ekwire-3a9a34170?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            twitter: "#",
+            facebook: "https://www.facebook.com/share/18eWKhnbCL/",
+            instagram:
+                "https://www.instagram.com/ekwirej?igsh=YzljYTk1ODg3Zg==",
+        },
+        aosDelay: 200,
+    },
+    {
+        id: 4,
+        name: "Mr. Justine Okodi",
+        title: "Board Treasurer",
+        image: "/assets/images/christine.png",
+        bio: `Justine Okodi serves as the Board Treasurer, bringing a wealth of financial and governance expertise to the team.`,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 300,
+    },
+    {
+        id: 5,
+        name: "Ms. Odongo Harriet Namissi",
+        title: "Board Member",
+        image: "/assets/images/omia.jpg",
+        bio: `Harriet Namissi is a valued Board Member, dedicated to guiding the organization's strategic direction.`,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 400,
+    },
+    {
+        id: 6,
+        name: "Mr. Odur Daniel Roy",
+        title: "Board Member",
+        image: "/assets/images/emma.jpg",
+        bio: `Daniel Roy Odur contributes his extensive experience as an active Board Member.`,
+        social: {
+            linkedin:
+                "https://www.linkedin.com/in/emma-louise-smith-4b90a8209?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            twitter: "#",
+            facebook: "https://www.facebook.com/emilou.smith.9",
+            instagram:
+                "https://www.instagram.com/3mmalouise_smith?igsh=YzljYTk1ODg3Zg==",
+        },
+        aosDelay: 500,
+    },
+
+    {
+        id: 6,
+        name: "Dr.Odur Andrew",
+        title: "Technical Advisor (Board)",
+        image: "/assets/images/emma.jpg",
+        bio: `Daniel Roy Odur contributes his extensive experience as an active Board Member.`,
+        social: {
+            linkedin:
+                "https://www.linkedin.com/in/emma-louise-smith-4b90a8209?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            twitter: "#",
+            facebook: "https://www.facebook.com/emilou.smith.9",
+            instagram:
+                "https://www.instagram.com/3mmalouise_smith?igsh=YzljYTk1ODg3Zg==",
+        },
+        aosDelay: 500,
+    },
+    {
+        id: 7,
+        name: "Dr. Deogratias Munube",
+        title: "Board Member",
+        image: "/assets/images/abura.png",
+        bio: `Dr. Deogratias Munube is a dedicated Board Member who brings clinical expertise and a deep understanding of public health challenges.`,
+        social: {
+            linkedin:
+                "https://www.linkedin.com/in/brian-abura-oringo-05576824b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+            twitter: "#",
+            facebook: "https://www.facebook.com/profile.php?id=61574882170431",
+            instagram: "#",
+        },
+        aosDelay: 600,
+    },
+]);
+
+const managementTeam = ref([
+    {
+        id: 8,
+        name: "Mr.Daniel Roy Odur",
+        title: "Executive Director",
+        image: "/assets/images/alfred.jpg",
+        bio: `Executive Director
+A dedicated advocate for sickle cell, a skilled public health specialist, and a professional focused on people's needs, he has achieved significant success in initiating, promoting, coordinating, and leading a wide range of strategic development programs to foster patient care and advocacy... [truncated for brevity]`,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+
+    {
+        id: 9,
+        name: "Ms.Kukunda Blessing",
+        title: "Deputy ED",
+        image: "/assets/images/jane.png",
+        bio: `
+Deputy ED
+Kukunda Blessing, a professional social worker... [truncated for brevity]`,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 100,
+    },
+    {
+        id: 8,
+        name: "Mr. Akar Allan Solomon",
+        title: "Finance & Admin Office",
+        image: "/assets/images/alfred.jpg",
+        bio: ` Finance & Admin Office
+Accountant`,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 8,
+        name: "Dr.Okaka Daniel",
+        title: "Outreach Officer",
+        image: "/assets/images/alfred.jpg",
+        bio: ``,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 8,
+        name: "Mr.Ococ Innocent",
+        title: "Laboratory Assistant",
+        image: "/assets/images/alfred.jpg",
+        bio: ``,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 8,
+        name: "Ms.Achola Mercy",
+        title: "Counsellor",
+        image: "/assets/images/alfred.jpg",
+        bio: ``,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 8,
+        name: "Mr.Okello Robert Hosea",
+        title: "Community Engagement Officer",
+        image: "/assets/images/alfred.jpg",
+        bio: ``,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+    {
+        id: 8,
+        name: "Mr.Obluk David",
+        title: "Head of Quality Assurance",
+        image: "/assets/images/alfred.jpg",
+        bio: ``,
+        social: {
+            linkedin: "#",
+            twitter: "#",
+            facebook: "#",
+            instagram: "#",
+        },
+        aosDelay: 0,
+    },
+]);
+
+const currentView = ref("Board");
+
+const toggleView = (view) => {
+    currentView.value = view;
+
+    AOS.refreshHard();
+};
+
+const displayedMembers = computed(() => {
+    return currentView.value === "Board"
+        ? boardMembers.value
+        : managementTeam.value;
+});
+
+const isModalOpen = ref(false);
+const selectedMember = ref({});
+
+const openModal = (member) => {
+    selectedMember.value = member;
+    isModalOpen.value = true;
+};
+
+const closeModal = () => {
+    isModalOpen.value = false;
+    selectedMember.value = {};
+};
+
+onMounted(() => {
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+});
+</script>
+
 <style scoped>
+.team-view-toggle {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.team-view-toggle button {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: rgba(128, 0, 0, 0.8);
+    background-color: white;
+    border: 2px solid rgba(128, 0, 0, 0.8);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.dark-theme-body .team-view-toggle button {
+    background-color: #333;
+    color: #eee;
+    border-color: #eee;
+}
+
+.team-view-toggle button:hover {
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
+    box-shadow: 0 4px 8px rgba(35, 86, 32, 0.3);
+}
+
+.team-view-toggle button.active {
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
+    box-shadow: 0 4px 8px rgba(35, 86, 32, 0.4);
+    transform: translateY(-1px);
+}
+
+body.dark-theme-body .team-view-toggle button.active {
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
+    border-color: rgba(128, 0, 0, 0.8);
+}
+
+@media (max-width: 600px) {
+    .team-view-toggle {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .team-view-toggle button {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
 .landing-section {
     position: relative;
-    height: 40vh;
     background-size: cover;
     background-position: center;
-    padding: 120px 0;
-    text-align: center;
-    color: white;
+    height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns content to the start (left) */
+    margin-bottom: 10px;
+    margin-top: -30px;
+    animation: fadeIn 1.5s ease-in;
+    padding-left: 5%;
+    overflow: hidden;
 }
+
+.landing-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    animation: zoomInOut 15s infinite alternate ease-in-out;
+}
+
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
 }
+
 .landing-content {
     position: relative;
-    z-index: 1;
-    padding-top: 70px;
-    animation: slideUpFadeIn 2s ease forwards;
-    opacity: 0;
+    z-index: 2;
+    color: #fff;
+    padding-top: 130px;
+    text-align: left;
+    max-width: 800px;
 }
 
 .landing-content h1 {
@@ -314,46 +509,185 @@ export default {
     font-weight: bold;
     animation: slideDown 1s ease;
 }
-.subtitle {
+
+.landing-content p {
+    font-size: 30px;
     font-weight: bold;
-    color: red;
+    margin-top: 15px;
+    padding-left: 15px;
+    border-left: red;
+    line-height: 1.6;
+}
+
+.tagline {
+    font-weight: bold;
     font-size: 20px;
 }
 
-@keyframes slideUpFadeIn {
-    0% {
-        transform: translateY(40px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeUp {
+@keyframes fadeIn {
     from {
-        transform: translateY(30px);
         opacity: 0;
+        transform: translateY(20px);
     }
+
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-body.dark-theme-body h2 {
+body.dark-theme-body .main-content2 {
+    background-color: #222;
+}
+
+.team-section {
+    margin-top: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    color: rgba(128, 0, 0, 0.8);
+}
+
+body.dark-theme-body .team-section h2 {
     color: white;
 }
 
-.modal-header {
-    background-color: red;
+.team-section p {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+body.dark-theme-body .team-section p {
     color: white;
 }
 
-body.dark-theme-body .modal-header {
-    background-color: #2c3e50;
+.team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    padding: 20px;
+    transition: transform 0.3s;
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+body.dark-theme-body .team-card {
+    background-color: #222;
+    border: 1px solid #235620;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    padding-left: 1px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.team-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2em;
+}
+
+.team-card p {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    margin: 0 5px;
+    color: rgba(128, 0, 0, 0.8);
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+body.dark-theme-body .social-icons a {
     color: white;
+}
+
+.social-icons a:hover {
+    color: blue;
+}
+
+.view-profile-btn {
+    margin-top: auto;
+    padding: 8px 16px;
+    background-color: rgba(128, 0, 0, 0.8);
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.view-profile-btn:hover {
+    border: 1px solid rgba(128, 0, 0, 0.8);
+    background-color: white;
+    color: rgba(128, 0, 0, 0.8);
+}
+
+/* MODAL STYLES */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: #ecfdf5;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
 }
 
 body.dark-theme-body .modal-content {
@@ -361,166 +695,172 @@ body.dark-theme-body .modal-content {
     color: white;
 }
 
-.team-section {
-    padding: 60px 0;
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(128, 0, 0, 0.8);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
-.section-heading {
+
+body.dark-theme-body .modal-header {
+    background-color: rgba(128, 0, 0, 0.8);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.4em;
+    color: white;
+}
+
+body.dark-theme-body .modal-header h2 {
+    color: #eee;
+}
+
+.close {
+    color: #aaa;
+    font-size: 32px;
     font-weight: bold;
-    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+body.dark-theme-body .close {
+    color: #ccc;
+}
+
+body.dark-theme-body .close:hover,
+body.dark-theme-body .close:focus {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 1em;
+    line-height: 1.6;
     color: #333;
 }
-.team-card {
+
+body.dark-theme-body .modal-body {
+    color: #eee;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    text-align: right;
+    background-color: #f7f7f7;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+body.dark-theme-body .modal-footer {
+    background-color: white;
+    border-top: 1px solid #666;
+}
+
+.close-modal-btn {
+    padding: 10px 20px;
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
     border: none;
-    border-radius: 10px;
-
-    overflow: hidden;
-    background: #fff;
-    animation: fadeUp 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(0);
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-}
-
-body.dark-theme-body .team-card {
-    background-color: #222;
-    border: 1px solid red;
-    color: white;
-}
-.team-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
-}
-.card-img-top {
-    max-width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
-}
-.card-text {
-    font-size: 18px;
-    color: #777;
-}
-
-.social-icons a {
-    margin: 0 6px;
-    color: black;
-    font-size: 18px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-body.dark-theme-body .social-icons a {
-    color: white;
-}
-.social-icons a:hover {
-    color: #d9534f;
-}
-
-.btn-2 {
-    color: black;
-    border: 1px solid red;
-    padding: 8px 20px;
-    border-radius: 10px;
-    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
-body.dark-theme-body .btn-2 {
-    color: white;
-}
-.btn-2:hover {
-    background-color: red;
-    color: white;
+.close-modal-btn:hover {
+    background-color: rgba(128, 0, 0, 0.8);
 }
 
-.follow {
-    font-size: 22px;
-    text-align: center;
-    color: black;
-    margin-bottom: 10px;
-}
-
-.tweet-container {
-    position: fixed;
-    top: 15%;
-    right: -100%;
-    width: 320px;
-    max-width: 90%;
-    background-color: white;
-    padding: 12px;
-    border-radius: 12px 0 0 12px;
-    z-index: 1000;
-    transition: right 0.6s ease-in-out;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-}
-
-.tweet-container.show {
-    right: 0;
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    border: none;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    padding: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-}
-
-.close-btn:hover {
-    background-color: red;
-    transform: scale(1.1);
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-}
-
-.close-btn:active {
-    transform: scale(0.9);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 600px) {
-    .tweet-container {
-        width: 90%;
-        right: -100%;
-        top: auto;
-        bottom: 20px;
-        padding-right: 30px;
-        border-radius: 10px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .landing-content h1 {
+        font-size: 32px;
     }
 
-    .tweet-container.show {
-        right: 5%;
+    .team-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 0 10px;
+    }
+
+    .landing-section {
+        padding-left: 20px;
+    }
+
+    .landing-content p {
+        font-size: 1.1em;
+        padding-left: 10px;
+        border-left-width: 3px;
     }
 }
 
-.blog-content {
-    padding: 20px;
-}
+@media (max-width: 480px) {
+    .landing-section {
+        height: 40vh;
+        padding-left: 15px;
+    }
 
-.blog-content h1 {
-    color: #007bff;
-}
+    .landing-content h1 {
+        font-size: 24px;
+    }
 
-.blog-content p {
-    line-height: 1.6;
+    .landing-content p {
+        font-size: 1em;
+        padding-left: 8px;
+        border-left-width: 2px;
+    }
+
+    .team-section {
+        padding: 0 15px;
+    }
+
+    .team-section h2 {
+        font-size: 26px;
+    }
+
+    .team-section p {
+        font-size: 1em;
+    }
+
+    .team-card {
+        padding: 15px;
+    }
+
+    .team-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2em;
+    }
+
+    .modal-body {
+        font-size: 0.9em;
+    }
+
+    .close {
+        font-size: 28px;
+    }
 }
 </style>

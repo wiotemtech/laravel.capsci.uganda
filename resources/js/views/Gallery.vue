@@ -1,3 +1,80 @@
+<template>
+    <div :class="{ 'dark-theme': isDarkMode }">
+        <div class="landing-container">
+            <div class="zoom-slide"></div>
+
+            <div class="overlay-content">
+                <div style="margin-top: 109px;" class="overlay-text-wrapper">
+                    <h2>/ Gallery</h2>
+                    <h1>welcome to our gallery page</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content" :class="{ 'dark-theme-body': isDarkMode }">
+            <div class="contact-head">
+                <h1 class="about-us-title">Visual Stories</h1>
+                <h2 class="about-us-subtitle">Shared moments and memories.</h2>
+            </div>
+
+            <section class="gallery-section">
+                <div class="gallery-grid">
+                    <div
+                        v-for="(image, index) in images"
+                        :key="index"
+                        class="gallery-col"
+                    >
+                        <div class="gallery-item" @click="openModal(index)">
+                            <img
+                                :src="image.src"
+                                :alt="image.alt"
+                                class="gallery-image"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div
+                v-if="showModal"
+                class="image-modal-overlay"
+                @click.self="closeModal"
+            >
+                <div class="image-modal-content">
+                    <span
+                        class="image-modal-close"
+                        @click="closeModal"
+                        title="Close"
+                        >&times;</span
+                    >
+
+                    <button
+                        class="nav-arrow prev"
+                        @click.stop="prevImage"
+                        title="Previous Image"
+                    >
+                        &#10094;
+                    </button>
+
+                    <img
+                        :src="currentImage.src"
+                        :alt="currentImage.alt"
+                        class="enlarged-image"
+                    />
+
+                    <button
+                        class="nav-arrow next"
+                        @click.stop="nextImage"
+                        title="Next Image"
+                    >
+                        &#10095;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script>
 export default {
     name: "SickleCellGallery",
@@ -5,28 +82,73 @@ export default {
         return {
             isDarkMode: false,
             images: [
-                { src: "/assets/images/11.jpg", alt: "Gallery Image 1" },
-                { src: "/assets/images/new.jpeg", alt: "Gallery Image 2" },
-                { src: "/assets/images/12.jpg", alt: "Gallery Image 3" },
-                { src: "/assets/images/12.jpg", alt: "Gallery Image 4" },
-                { src: "/assets/images/14.jpg", alt: "Gallery Image 5" },
-                { src: "/assets/images/15.jpg", alt: "Gallery Image 6" },
-                { src: "/assets/images/17.jpg", alt: "Gallery Image 7" },
-                { src: "/assets/images/18.jpg", alt: "Gallery Image 8" },
-                { src: "/assets/images/9.jpg", alt: "Gallery Image 9" },
-                { src: "/assets/images/4.jpg", alt: "Gallery Image 10" },
-                { src: "/assets/images/16.jpg", alt: "Gallery Image 11" },
+                { src: "/assets/images/16.jpg", alt: "Gallery Image 1" },
+                { src: "/assets/images/12.jpg", alt: "Gallery Image 2" },
+                { src: "/assets/images/10.jpg", alt: "Gallery Image 3" },
+                { src: "/assets/images/17.jpg", alt: "Gallery Image 4" },
+                { src: "/assets/images/18.jpg", alt: "Gallery Image 5" },
+                { src: "/assets/images/4.jpg", alt: "Gallery Image 6" },
+                { src: "/assets/images/7.jpg", alt: "Gallery Image 7" },
+                { src: "/assets/images/oj.jpeg", alt: "Gallery Image 8" },
+                { src: "/assets/images/cp.jpeg", alt: "Gallery Image 9" },
+                { src: "/assets/images/dd.jpg", alt: "Gallery Image 10" },
+                { src: "/assets/images/12.jpg", alt: "Gallery Image 11" },
+                { src: "/assets/images/run.jpeg", alt: "Gallery Image 12" },
+                { src: "/assets/images/new.jpeg", alt: "Gallery Image 13" },
+                { src: "/assets/images/about.jpg", alt: "Gallery Image 14" },
+                { src: "/assets/images/10.jpg", alt: "Gallery Image 15" },
+                { src: "/assets/images/11.jpg", alt: "Gallery Image 16" },
             ],
+
             showPopup: false,
             shownOnce: false,
             hideTimeout: null,
             reappearTimeout: null,
+
+            showModal: false,
+            currentIndex: 0,
         };
     },
-    methods: {
-        openModal(imageSrc) {
-            console.log("Opening modal with image:", imageSrc);
+    computed: {
+        currentImage() {
+            return this.images[this.currentIndex] || { src: "", alt: "" };
         },
+    },
+    methods: {
+        openModal(index) {
+            this.currentIndex = index;
+            this.showModal = true;
+
+            document.body.style.overflow = "hidden";
+        },
+
+        closeModal() {
+            this.showModal = false;
+
+            document.body.style.overflow = "";
+        },
+
+        nextImage() {
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        },
+
+        prevImage() {
+            this.currentIndex =
+                (this.currentIndex - 1 + this.images.length) %
+                this.images.length;
+        },
+        handleKeydown(event) {
+            if (this.showModal) {
+                if (event.key === "ArrowRight") {
+                    this.nextImage();
+                } else if (event.key === "ArrowLeft") {
+                    this.prevImage();
+                } else if (event.key === "Escape") {
+                    this.closeModal();
+                }
+            }
+        },
+
         showTweet() {
             if (!this.shownOnce) {
                 this.showPopup = true;
@@ -49,7 +171,6 @@ export default {
     },
     mounted() {
         setTimeout(this.showTweet, 5000);
-
         if (!window.twttr) {
             const twitterScript = document.createElement("script");
             twitterScript.setAttribute(
@@ -66,171 +187,191 @@ export default {
         ) {
             window.twttr.widgets.load();
         }
+
+        window.addEventListener("keydown", this.handleKeydown);
     },
     beforeUnmount() {
         clearTimeout(this.hideTimeout);
         clearTimeout(this.reappearTimeout);
+
+        window.removeEventListener("keydown", this.handleKeydown);
+
+        document.body.style.overflow = "";
     },
 };
 </script>
 
-<template>
-    <div class="main-content" :class="{ 'dark-theme-body': isDarkMode }">
-        <div class="blog-container">
-            <div class="tweet-container" :class="{ show: showPopup }">
-                <h1 class="follow">follow us on x</h1>
-                <button class="close-btn" @click="dismissPopup">×</button>
-                <blockquote class="twitter-tweet" data-width="280">
-                    <p lang="en" dir="ltr">
-                        Integrated Sickle Cell services!<br />
-                        Residents of Ayago, Apoi Subcounty in Apac Dist have
-                        tuned up for sickle cell traits screening; we have
-                        collaborated with Ayago Health Centre II to screen for
-                        Malaria, HIV, Sphilys, H.pylori, HepB, RBS, and
-                        Hypertension.
-                        <a
-                            href="https://twitter.com/cphluganda?ref_src=twsrc%5Etfw"
-                            >@cphluganda</a
-                        >
-                        <a
-                            href="https://twitter.com/TestandTreat37?ref_src=twsrc%5Etfw"
-                            >@TestandTreat37</a
-                        >
-                        <a href="https://t.co/1eAO3W8bIn"
-                            >pic.twitter.com/1eAO3W8bIn</a
-                        >
-                    </p>
-                    &mdash; Catherine Phil Sickle Cell Support Initiative
-                    (@UgandaSickle)
-                    <a
-                        href="https://twitter.com/UgandaSickle/status/1885259581686706531?ref_src=twsrc%5Etfw"
-                        >January 31, 2025</a
-                    >
-                </blockquote>
-            </div>
-            <div class="blog-content">
-                <h1>Welcome to our Blog</h1>
-                <p>This is some sample blog content.</p>
-            </div>
-        </div>
-
-        <section
-            :class="{ 'dark-theme-events': isDarkMode }"
-            style="background-image: url(&quot;/assets/images/14.jpg&quot;)"
-            class="landing-section"
-        >
-            <div class="overlay"></div>
-            <div class="landing-content">
-                <h1>Our Gallery Page</h1>
-                <!-- <p style="font-weight: bold; color: red">
-                    "Leave No One Behind"
-                </p>-->
-            </div>
-        </section>
-
-        <section
-            class="main-content2"
-            :class="{ 'dark-theme-events': isDarkMode }"
-        >
-            <div class="container">
-                <div class="row g-4">
-                    <div
-                        v-for="(image, index) in images"
-                        :key="index"
-                        class="col-12 col-sm-6 col-md-4 col-lg-3 fade-in"
-                    >
-                        <div
-                            class="gallery-item"
-                            data-bs-toggle="modal"
-                            data-bs-target="#lightboxModal"
-                            @click="openModal(image.src)"
-                        >
-                            <img :src="image.src" :alt="image.alt" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</template>
-
 <style scoped>
-.container {
-    margin-bottom: 20px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.landing-section {
+body,
+html {
+    height: 100%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.landing-container {
     position: relative;
-    background-size: cover;
-    background-position: center;
-    height: 25vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    margin-top: -30px;
-
+    margin-top: -130px;
+    height: 75vh;
     animation: fadeIn 1.5s ease-in;
+    overflow: hidden;
+
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 0;
 }
 
-.overlay {
+.zoom-slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1;
+
+    background-image: url("/public/assets/images/run.jpeg");
+    background-position: center;
+    background-size: cover;
+    animation: zoomEffect 15s ease-in-out infinite alternate;
+
+    z-index: -1;
 }
 
-.landing-content {
-    position: relative;
+@keyframes zoomEffect {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.4);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+
+        transform: translate(-50%, -40%);
+    }
+    100% {
+        opacity: 1;
+
+        transform: translate(-50%, -50%);
+    }
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
     z-index: 2;
-    color: #fff;
-    padding-top: 10px;
+    padding: 20px;
+    width: 90%;
+
+    text-align: left;
+
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: slideUp 1.2s ease-out 0.8s forwards;
+}
+
+.overlay-text-wrapper {
+    line-height: 1.5;
+}
+
+.overlay-content h1 {
+    font-size: 60px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.overlay-content h2:first-of-type {
+    margin-bottom: 6px;
+}
+.overlay-content h2:last-of-type {
+    line-height: 1.4;
+    padding-left: 15px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .overlay-content h1 {
+        font-size: 2.8rem;
+    }
+    .overlay-content h2 {
+        font-size: 1rem;
+    }
+    .overlay-content {
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        text-align: center;
+    }
+}
+
+.contact-head {
     text-align: center;
+    padding: 40px 20px 20px;
 }
 
-.landing-content h1 {
-    font-size: 40px;
+.about-us-title {
+    font-size: 1.5rem;
     font-weight: bold;
-    animation: slideDown 1s ease;
-}
-
-.tagline {
-    font-weight: bold;
-    font-size: 20px;
     color: red;
+    margin-bottom: 10px;
 }
 
-body.dark-theme-body .main-content2 {
-    background-color: #222;
-    color: red;
-}
-
-.gallery h2 {
+.about-us-subtitle {
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: red;
+    color: rgba(128, 0, 0, 0.8);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.gallery-section {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
+    height: 250px;
     transition:
         transform 0.3s ease-in-out,
         box-shadow 0.3s ease-in-out;
     cursor: pointer;
+    background-color: #eee;
 }
 
-.gallery-item img {
+.gallery-image {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
+    height: 100%;
+    object-fit: cover;
     transition:
         transform 0.3s ease-in-out,
         opacity 0.3s ease-in-out;
@@ -238,111 +379,102 @@ body.dark-theme-body .main-content2 {
 
 .gallery-item:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-.gallery-item:hover img {
+.gallery-item:hover .gallery-image {
     transform: scale(1.1);
     opacity: 0.8;
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1s ease-in-out forwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.follow {
-    font-size: 22px;
-    text-align: center;
-    color: black;
-    margin-bottom: 10px;
-}
-.tweet-container {
+.image-modal-overlay {
     position: fixed;
-    top: 15%;
-    right: -100%;
-    width: 320px;
-    max-width: 90%;
-    background-color: white;
-    padding: 12px;
-    border-radius: 12px 0 0 12px;
-    z-index: 1000;
-    transition: right 0.6s ease-in-out;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
-.tweet-container.show {
-    right: 0;
+.image-modal-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.close-btn {
+.enlarged-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    border: none;
-    color: white;
-    font-size: 20px;
+    top: -25px;
+    right: -25px;
+    color: #fff;
+    font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    z-index: 2002;
+    transition: color 0.2s ease-in-out;
+    background: #0d6efd;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
+    width: 50px;
+    height: 50px;
+    line-height: 40px;
     text-align: center;
     padding: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.close-btn:hover {
-    background-color: red;
-    transform: scale(1.1);
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+.image-modal-close:hover {
+    color: #ff0000;
+    background: #084298;
 }
 
-.close-btn:active {
-    transform: scale(0.9);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 16px 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.3s ease;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    z-index: 2001;
+    outline: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
-@media (max-width: 600px) {
-    .tweet-container {
-        width: 90%;
-        right: -100%;
-        top: auto;
-        bottom: 20px;
-        padding-right: 30px;
-        border-radius: 10px;
-    }
-
-    .tweet-container.show {
-        right: 5%;
-    }
+.prev {
+    left: 0;
+    border-radius: 0;
 }
 
-.blog-content {
-    padding: 20px;
+.next {
+    right: 0;
+    border-radius: 0;
 }
 
-.blog-content h1 {
-    color: #007bff;
-}
-
-.blog-content p {
-    line-height: 1.6;
+.nav-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 </style>

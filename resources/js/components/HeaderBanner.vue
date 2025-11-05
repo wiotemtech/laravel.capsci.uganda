@@ -5,9 +5,26 @@ export default {
         return {
             menuOpen: false,
             isDarkMode: false,
+            showDropdown: false,
+            showDiscoverDropdown: false,
         };
     },
     methods: {
+        toggleDropdown() {
+            this.showDropdown = !this.showDropdown;
+            // Close other dropdowns
+            this.showDiscoverDropdown = false;
+        },
+        toggleDiscoverDropdown() {
+            this.showDiscoverDropdown = !this.showDiscoverDropdown;
+            // Close other dropdowns
+            this.showDropdown = false;
+        },
+        closeDropdown() {
+            this.showDropdown = false;
+            this.showDiscoverDropdown = false;
+            this.closeMenu();
+        },
         toggleTheme() {
             this.isDarkMode = !this.isDarkMode;
             document.body.classList.toggle("dark-theme-body", this.isDarkMode);
@@ -15,11 +32,6 @@ export default {
         },
         closeMenu() {
             this.menuOpen = false;
-
-            const check = document.getElementById("check");
-            if (check) {
-                check.checked = false;
-            }
         },
     },
     mounted() {
@@ -34,12 +46,31 @@ export default {
 
 <template>
     <div>
-        
-        <div class="scroll-banner" :class="{ 'dark-theme-banner': isDarkMode }">
-            <div class="scroll-content">
-                CATHERINE PHIL SICKLE CELL SUPPORT  INITIATIVE. 
-                <span class="line-break"><br /></span>
-                
+        <div class="top-bar" :class="{ 'dark-theme-top-bar': isDarkMode }">
+            <div class="contact-info">
+                <span class="info-item" style="font-size: 16px">
+                    <i class="bx bxs-map"></i>
+                    Kulambiro–Najjera Road, Kampala.
+                </span>
+                <span class="info-item" style="font-size: 16px">
+                    <i class="bx bxs-envelope"></i>
+
+                    info@capsci-uganda.org
+                </span>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"
+                    ><i class="bx bxl-facebook"></i
+                ></a>
+                <a href="#" class="social-icon"
+                    ><i class="bx bxl-twitter"></i
+                ></a>
+                <a href="#" class="social-icon"
+                    ><i class="bx bxl-instagram"></i
+                ></a>
+                <a href="#" class="social-icon"
+                    ><i class="bx bxl-linkedin"></i
+                ></a>
             </div>
         </div>
 
@@ -52,10 +83,11 @@ export default {
                 <img
                     src="/public/assets/images/logo1.png"
                     alt="Logo"
-                    width="70"
-                    height="70"
+                    width="80px"
+                    height=""
+                    class="logo"
                 />
-                <span class="logo-text">CAPSCI-UG</span>
+                <span class="logo-text"> CAPSCI-UG</span>
             </a>
 
             <input type="checkbox" id="check" v-model="menuOpen" />
@@ -79,77 +111,122 @@ export default {
                     to="/"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Home</router-link
+                    >HOME</router-link
                 >
 
                 <router-link
-                    to="/resources"
+                    to="/about"
+                    class="ojede"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Resources</router-link
-                >
-                <router-link
-                    to="/blogs"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                    @click.native="closeMenu"
-                    >Blogs</router-link
+                    >ABOUT US</router-link
                 >
                 <router-link
                     to="/gallery"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Gallery</router-link
+                    >GALLERY</router-link
                 >
-                <div
-                    class="dropdown"
-                    :class="{ 'dark-theme-dropdown': isDarkMode }"
+
+                <router-link
+                    to="/blogs"
+                    class="ojede"
+                    :class="{ 'dark-theme-link': isDarkMode }"
+                    @click.native="closeMenu"
+                    >BLOGS</router-link
                 >
-                    <router-link
-                        to=""
-                        class="dropdown-toggle"
-                        :class="{ 'dark-theme-link': isDarkMode }"
-                    >
-                        Our Team
-                    </router-link>
+
+                <router-link
+                    to="/board-members"
+                    class="ojede"
+                    :class="{ 'dark-theme-link': isDarkMode }"
+                    @click.native="closeMenu"
+                    >OUR TEAM</router-link
+                >
+                <!--
+                <div class="custom-dropdown">
                     <div
-                        class="dropdown-content"
-                        :class="{ 'dark-theme-dropdown-content': isDarkMode }"
+                        class="custom-dropdown-toggle"
+                        :class="{ 'dark-theme-link': isDarkMode }"
+                        @click="toggleDropdown"
+                    >
+                        Our Projects
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+
+                    
+                    <div
+                        class="custom-dropdown-menu"
+                        :class="{
+                            show: showDropdown,
+                            'dark-theme-dropdown': isDarkMode,
+                        }"
                     >
                         <router-link
-                            to="/board-members"
+                            to="/SCMH-Fund"
+                            class="dropdown-item"
                             :class="{ 'dark-theme-link': isDarkMode }"
-                            @click.native="closeMenu"
-                            >Board Members</router-link
+                            @click.native="closeDropdown"
+                            >Sickle Cell Mental Health Fund</router-link
+                        >
+                        <router-link
+                            to="/SPRout-Program"
+                            class="dropdown-item"
+                            :class="{ 'dark-theme-link': isDarkMode }"
+                            @click.native="closeDropdown"
+                            >School-Based Mental Health <br />
+                            Research & Support Program</router-link
+                        >
+                
+                    </div>
+                
+                </div>
+            -->
+
+                <!--
+                <div class="custom-dropdown">
+                    <div
+                        class="custom-dropdown-toggle"
+                        :class="{ 'dark-theme-link': isDarkMode }"
+                        @click="toggleDiscoverDropdown"
+                    >
+                        OUR TEAM
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                    <div
+                        class="custom-dropdown-menu"
+                        :class="{
+                            show: showDiscoverDropdown,
+                            'dark-theme-dropdown': isDarkMode,
+                        }"
+                    >
+                    
+                        <router-link
+                            to="/board-members"
+                            class="dropdown-item"
+                            :class="{ 'dark-theme-link': isDarkMode }"
+                            @click.native="closeDropdown"
+                            >BOARD MEMBERS </router-link
                         >
                         <router-link
                             to="/management-members"
+                            class="dropdown-item"
                             :class="{ 'dark-theme-link': isDarkMode }"
-                            @click.native="closeMenu"
-                            >Management Members</router-link
+                            @click.native="closeDropdown"
+                            >MANAGEMENT </router-link
                         >
+                    
                     </div>
+                
                 </div>
-
-                <router-link
-                    to="/events"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                    @click.native="closeMenu"
-                    >Events</router-link
-                >
+            -->
                 <router-link
                     to="/contact-us"
                     :class="{ 'dark-theme-link': isDarkMode }"
                     @click.native="closeMenu"
-                    >Contact-us</router-link
+                    >CONTACT US</router-link
                 >
-                <router-link
-                    to="jdjdjd"
-                    class="donate-btn"
-                    :class="{ 'dark-theme-button': isDarkMode }"
-                    data-bs-toggle="modal"
-                    data-bs-target="#buyKitModal"
-                    >Donate</router-link
-                >
+
                 <button
                     @click="toggleTheme"
                     class="theme-toggle"
@@ -157,60 +234,117 @@ export default {
                     @click.native="closeMenu"
                 >
                     <i :class="isDarkMode ? 'bx bx-sun' : 'bx bx-moon'"></i>
+                    <span class="theme-label">{{ isDarkMode ? "" : "" }}</span>
                 </button>
             </nav>
         </header>
-
-        <div
-            class="modal fade"
-            id="buyKitModal"
-            tabindex="-1"
-            aria-labelledby="buyKitModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div style="background-color: red" class="modal-header">
-                        <h5 class="modal-title" id="buyKitModalLabel">
-                            Support The Fight Against Sickle cells
-                        </h5>
-
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Please Pay with Momo.</p>
-                        <h4 class="p-3">Code: <b>726187</b></h4>
-                        <p>Catherine Phil SCD</p>
-
-                        <div class="modal-footer">
-                            <button
-                                style="background-color: red; color: white"
-                                type="button"
-                                class="btn"
-                                data-bs-dismiss="modal"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
 <style>
+/* Import Boxicons for icons */
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+
+.logo {
+    border-radius: 50px;
+}
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #f9f9f9, #eaf1f8);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+
+    padding-top: 80px;
+}
+
+body.dark-theme-body {
+    background: linear-gradient(to right, #222, #222);
+    color: #eee;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 19%;
+    z-index: 999;
+}
+
+.top-bar.dark-theme-top-bar {
+    background-color: rgba(128, 0, 0, 0.8);
+}
+
+.contact-info {
+    display: flex;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.info-item i {
+    margin-right: 8px;
+    font-size: 23px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: white;
+    font-size: 20px;
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #0d6efd;
+    transform: scale(1.2);
+}
+
+.header {
+    position: fixed;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    padding: 1px 12%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 998;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header.dark-theme-header {
+    background-color: #111;
+}
+
 .navbar-brand.logo {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: black;
     font-weight: bold;
+
     font-size: 20px;
     transition: color 0.3s ease;
 }
@@ -220,182 +354,15 @@ export default {
 }
 
 .logo-text {
-    margin-left: -5px;
+    margin-top: 1px;
     font-size: inherit;
     font-weight: inherit;
-}
-
-.navbar-brand.logo-aligned {
-    justify-content: flex-start;
-}
-
-.navbar-brand.logo-aligned .logo-text {
-    margin-left: auto;
-}
-
-.navbar-brand.logo-aligned.dark-theme-logo .logo-text {
-    color: red;
-}
-
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: red;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    display: block;
     color: black;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 18px;
-    margin-left: 18px;
-    padding: 0;
-    transition: color 0.3s ease;
-}
-
-.dropdown-toggle:hover {
-    background-color: red;
-    color: white;
-    border-radius: 4px;
-    padding: 4px;
-}
-
-.dropdown-toggle.dark-theme-link {
-    color: white;
-}
-
-.dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border-radius: 10px;
-
-    border-top: none;
-    z-index: 10;
-    display: none;
-    min-width: 150px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-    text-align: left;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-    margin-left: 0;
-}
-
-.dropdown-content a:hover {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-body.dark-theme-body {
-    background-color: #222;
-    color: #eee;
-}
-
-.scroll-banner {
-    width: 100%;
-    background-color: red;
-    color: white;
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 10px;
-    overflow: hidden;
-    text-align: center;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-}
-
-.scroll-banner.dark-theme-banner {
-    background-color: #2c3e50;
-    color: red;
-}
-
-body.dark-theme-body .scroll-content {
-    color: red;
-}
-
-.scroll-content {
-    display: inline-block;
-    animation: bounceText 12s ease-in-out infinite alternate;
-    white-space: nowrap;
-    font-size: 16px;
     font-weight: bold;
+}
+
+body.dark-theme-body .logo-text {
     color: white;
-}
-
-@keyframes bounceText {
-    0% {
-        transform: translateX(-15%);
-    }
-    100% {
-        transform: translateX(15%);
-    }
-}
-
-.line-break {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .scroll-content {
-        white-space: normal;
-        font-size: 14px;
-    }
-    .line-break {
-        display: inline;
-    }
-}
-
-.header {
-    position: fixed;
-    top: 35px;
-    left: 0;
-    width: 100%;
-    padding: 8px 8%;
-    background-color: white;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 998;
-    transition: background-color 0.3s ease;
-}
-
-.header.dark-theme-header {
-    background-color: #222;
-}
-
-.logo.dark-theme-logo {
-    color: #eee;
 }
 
 .navbar {
@@ -403,54 +370,72 @@ body.dark-theme-body .scroll-content {
     align-items: center;
     flex-wrap: wrap;
     transition: background-color 0.3s ease;
+    justify-content: flex-end;
+}
+
+.navbar > * {
+    margin-left: 25px;
+}
+
+.navbar > *:first-child {
+    margin-left: 0;
 }
 
 .navbar a {
     color: black;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 18px;
-    margin-left: 18px;
+    font-weight: 650;
+    font-size: 16px;
+    position: relative;
     transition: color 0.3s ease;
+    padding: 4px 0;
 }
 
 .navbar a:hover {
-    background-color: red;
-    color: white;
-    border-radius: 4px;
-    padding: 4px;
+    /*color: #7aa902;*/
+    color: rgba(128, 0, 0, 0.8);
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: rgb(37, 36, 36);
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar a:hover::after,
+.navbar a.router-link-active::after {
+    width: 100%;
+}
+
+.navbar a.router-link-active {
+    color: red;
 }
 
 .navbar a.dark-theme-link {
     color: white;
 }
 
-.navbar .donate-btn {
-    background-color: white;
-    border: 2px solid red;
-    color: #222;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-weight: bold;
-    margin-left: 22px;
-    transition:
-        background 0.3s,
-        color 0.3s;
+.navbar a.dark-theme-link:hover {
+    color: rgba(128, 0, 0, 0.8);
+}
+
+.navbar a.dark-theme-link.router-link-active {
+    color: red;
+}
+
+.navbar a.dark-theme-link::after {
+    background: white;
 }
 
 .navbar .donate-btn:hover {
-    background-color: lightgray;
-    color: darkblue;
-}
-
-.navbar .donate-btn.dark-theme-button {
-    background-color: #eee;
-    color: #333;
-}
-
-.navbar .donate-btn.dark-theme-button:hover {
-    background-color: #ccc;
-    color: #111;
+    background-color: #0d6efd;
+    color: white;
+    text-decoration: none;
 }
 
 #check {
@@ -465,7 +450,6 @@ body.dark-theme-body .scroll-content {
     display: none;
     cursor: pointer;
     transition: color 0.3s ease;
-
     align-items: center;
 }
 
@@ -483,13 +467,29 @@ body.dark-theme-body .scroll-content {
 
 .theme-toggle {
     background: none;
-    border: none;
+    padding: 2px 3px;
+    border-radius: 10px;
     color: black;
     font-size: 28px;
     cursor: pointer;
-    margin-left: 22px;
     outline: none;
-    transition: color 0.3s ease;
+    transition:
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: #333333;
+    box-shadow: 0 4px 10px rgba();
+    transform: scale(1.2);
+}
+
+.theme-label {
+    font-size: 18px;
+    position: relative;
+    bottom: 4px;
+    padding-right: 3px;
 }
 
 .theme-toggle.dark-theme-button {
@@ -497,20 +497,46 @@ body.dark-theme-body .scroll-content {
 }
 
 @media (max-width: 768px) {
+    .top-bar {
+        height: auto;
+        padding: 10px 5%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .info-item {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .social-icons {
+        gap: 10px;
+    }
+
     .navbar {
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: whitesmoke;
+        background-color: #ecfdf5;
         flex-direction: column;
         align-items: center;
         overflow: hidden;
         display: none;
     }
 
+    .navbar-brand.logo {
+        padding-top: 8px;
+    }
+
     .navbar.dark-theme-navbar {
-        background-color: #555;
+        background-color: #1e2620;
     }
 
     .navbar a {
@@ -518,7 +544,8 @@ body.dark-theme-body .scroll-content {
         font-size: 1.1rem;
         margin: 1rem 0;
         text-align: center;
-        transform: translateY(-20px);
+
+        transform: translateX(100%);
         opacity: 0;
         transition:
             opacity 0.3s ease,
@@ -526,7 +553,8 @@ body.dark-theme-body .scroll-content {
     }
 
     .header {
-        margin-top: 12px;
+        top: auto;
+        margin-top: 33px;
     }
 
     #check:checked ~ .navbar {
@@ -534,7 +562,7 @@ body.dark-theme-body .scroll-content {
     }
 
     #check:checked ~ .navbar a {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
         transition-delay: calc(0.15s * var(--i));
     }
@@ -550,6 +578,16 @@ body.dark-theme-body .scroll-content {
     #check:checked ~ .icons #close-icon {
         display: inline;
     }
+
+    .custom-dropdown-menu.show {
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 250px;
+        text-align: center;
+    }
+    .custom-dropdown-menu .dropdown-item {
+        padding: 10px 12px;
+    }
 }
 
 .content {
@@ -559,5 +597,139 @@ body.dark-theme-body .scroll-content {
 
 .content.dark-theme-content {
     color: #eee;
+}
+
+.custom-dropdown-toggle {
+    position: relative;
+    padding: 4px 0;
+}
+
+.custom-dropdown-toggle::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: rgb(37, 36, 36);
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.custom-dropdown-toggle:hover::after,
+.custom-dropdown-toggle.router-link-active::after {
+    width: 100%;
+}
+
+.dark-theme-link.custom-dropdown-toggle::after {
+    background: white;
+}
+
+.custom-dropdown-menu .dropdown-item {
+    position: relative;
+    font-weight: 650;
+    font-size: 16px;
+    padding: 12px 16px;
+    color: black;
+    text-decoration: none;
+}
+
+.custom-dropdown-menu .dropdown-item::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: rgba(128, 0, 0, 0.8);
+    left: 0;
+    bottom: 8px;
+    transition: width 0.3s ease-in-out;
+}
+
+.custom-dropdown-menu .dropdown-item:hover::after {
+    width: 100%;
+}
+
+.dark-theme-dropdown .dropdown-item {
+    color: #eee;
+}
+
+.dark-theme-dropdown .dropdown-item:hover {
+    background-color: #444;
+    color: black;
+}
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.custom-dropdown-toggle {
+    cursor: pointer;
+
+    font-weight: 650;
+    margin-right: -18px;
+    color: black;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+body.dark-theme-body .custom-dropdown-toggle {
+    color: white;
+}
+
+body.dark-theme-body .custom-dropdown-toggle:hover {
+    color: rgba(128, 0, 0, 0.8);
+}
+
+.custom-dropdown-toggle:hover {
+    color: rgba(128, 0, 0, 0.8);
+}
+
+.custom-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.custom-dropdown-menu.show {
+    display: block;
+}
+
+.custom-dropdown-menu .dropdown-item {
+    padding: 12px 16px;
+    display: block;
+    color: black;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.custom-dropdown-menu .dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: rgba(128, 0, 0, 0.8);
+}
+
+.dark-theme-dropdown {
+    background-color: #333;
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme-dropdown .dropdown-item {
+    color: #eee;
+}
+
+.dark-theme-dropdown .dropdown-item:hover {
+    background-color: #444;
+    color: black;
 }
 </style>

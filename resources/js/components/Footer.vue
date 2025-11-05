@@ -1,409 +1,375 @@
-<script>
-export default {
-    name: "Footer",
-    props: {
-        isDarkMode: Boolean,
-    },
-};
+<script setup>
+import { ref } from "vue";
+
+const isDarkMode = ref(false);
 </script>
 
 <template>
-    <footer class="footer-section" :class="{ 'dark-theme-footer': isDarkMode }">
-        <div class="container text-center mb-4"></div>
+    <footer class="footer-academy-custom" :class="{ 'dark-mode': isDarkMode }">
+        <div class="container-compact">
+            <div class="row-compact">
+                <div class="col-logo mb-3">
+                    <img
+                        src="/public/assets/images/logo1.png"
+                        alt="CAPSCI Logo"
+                        class="footer-logo"
+                    />
+                    <h6
+                        style="color: white"
+                        class="text-uppercase academy-name"
+                    >
+                        CAPSCI Uganda
+                    </h6>
+                    <p class="tagline-text">
+                        Do You Know Your Sickle Cell Status? Get Tested Today.
+                    </p>
 
-        <section
-            class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-            :class="{ 'dark-theme-border-bottom': isDarkMode }"
-        >
-            <div
-                class="me-5 d-none d-lg-block"
-                :class="{ 'dark-theme-text': isDarkMode }"
+                    <div class="social-icons mt-2">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-links mb-3">
+                    <h6>Quick Links</h6>
+                    <a href="#">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Services</a>
+                    <a href="#">Partners</a>
+                    <a href="#">Contact</a>
+                    <a href="#">FAQs</a>
+                </div>
+
+                <!-- Services -->
+                <div class="col-focus mb-3">
+                    <h6>Our Services</h6>
+                    <p><a href="#">Confirmatory Testing</a></p>
+                    <p><a href="#">Screening</a></p>
+                    <p><a href="#">Counselling</a></p>
+                    <p><a href="#">Educating</a></p>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-contact mb-3">
+                    <h6>Contact Headquarters</h6>
+                    <p>
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Plot 1628, Block 215, Kulambiro–Najjera Road, Kampala,
+                        Uganda.
+                    </p>
+                    <p>
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Field Office: 2nd Floor Yodev Plaza, Behind Lira Hotel
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        info@capsci-uganda.org
+                    </p>
+                    <p><i class="fas fa-phone me-2"></i> +256 392 150 047</p>
+
+                    <div style="color: #0b028d" class="button-group mt-3">
+                        <router-link
+                            to="/contact-us"
+                            class="btn-cta btn-partner"
+                            >Partner with Us</router-link
+                        >
+                        <a href="#" class="btn-cta btn-donate"
+                            >Support Our Work</a
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom text-center mt-4">
+                <p class="mb-0">
+                    &copy; 2025 CAPSCI Uganda. All Rights Reserved.
+                    <a href="" target="_blank" rel="noopener noreferrer"> </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Floating Buttons -->
+        <div class="floating-wrapper whatsapp-float">
+            <a
+                class="floating-icon whatsapp-color"
+                href="https://wa.me/256774526849"
+                target="_blank"
             >
-                <span>Get connected with us on social networks:</span>
-            </div>
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
 
-            <div class="footer-social-icons">
-                <a
-                    href="#"
-                    class="me-4"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                >
-                    <i class="fab fa-facebook fa-2x"></i>
-                </a>
-                <a
-                    href="#"
-                    class="me-4"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                >
-                    <i class="fab fa-twitter fa-2x"></i>
-                </a>
-                <a
-                    href="#"
-                    class="me-4"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                >
-                    <i class="fab fa-instagram fa-2x"></i>
-                </a>
-                <a
-                    href="#"
-                    class="me-4"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                >
-                    <i class="fab fa-linkedin fa-2x"></i>
-                </a>
-            </div>
-        </section>
-
-        <section :class="{ 'dark-theme-section': isDarkMode }">
-            <div class="container text-center text-md-start mt-5">
-                <div class="row mt-3">
-                    <div
-                        class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"
-                        :class="{ 'dark-theme-text': isDarkMode }"
-                    >
-                        <h6
-                            class="text-uppercase fw-bold mb-4"
-                            :class="{ 'dark-theme-heading': isDarkMode }"
-                        >
-                            <i class="fas fa-gem me-3"></i>CAPSCI
-                        </h6>
-                        <p
-                            class="footer-p"
-                            :class="{ 'dark-theme-paragraph': isDarkMode }"
-                        >
-                            Do You Know Your Sickle Cell Status? <br />
-                            Get Tested Today.
-                        </p>
-                    </div>
-
-                    <div
-                        class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"
-                        :class="{ 'dark-theme-text': isDarkMode }"
-                    >
-                        <h6
-                            class="text-uppercase fw-bold mb-4"
-                            :class="{ 'dark-theme-heading': isDarkMode }"
-                        >
-                            Services
-                        </h6>
-                        <ul class="list-unstyled">
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Confirmatory Testing</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Screening</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Counselling</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Educating</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div
-                        class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4"
-                        :class="{ 'dark-theme-text': isDarkMode }"
-                    >
-                        <h6
-                            class="text-uppercase fw-bold mb-4"
-                            :class="{ 'dark-theme-heading': isDarkMode }"
-                        >
-                            Partners
-                        </h6>
-                        <ul class="list-unstyled">
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Ministry of Health</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Lira University</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >NICOSAM</a
-                                >
-                            </li>
-                            <li class="footer-p">
-                                <a
-                                    href="#!"
-                                    class="footer-link"
-                                    :class="{ 'dark-theme-link': isDarkMode }"
-                                    >Q Fm</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div
-                        class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4"
-                        :class="{ 'dark-theme-text': isDarkMode }"
-                    >
-                        <h6
-                            class="text-uppercase fw-bold mb-4"
-                            :class="{ 'dark-theme-heading': isDarkMode }"
-                        >
-                            Find Us
-                        </h6>
-                        <p
-                            class="footer-p"
-                            :class="{ 'dark-theme-paragraph': isDarkMode }"
-                        >
-                            <i class="fa fa-home me-3"></i> Head Office: Plot
-                            1628,Block 215,Kulambiro-Najjera Road Kyadondo-Mengo
-                            Kampala Uganda.
-                        </p>
-                        <p
-                            class="footer-p"
-                            :class="{ 'dark-theme-paragraph': isDarkMode }"
-                        >
-                            <i class="fa fa-map-marker me-3"></i> Field
-                            Office:2nd Floor Yodev Plaza,Behind Lira Hotel
-                        </p>
-                        <p
-                            class="footer-p"
-                            :class="{ 'dark-theme-paragraph': isDarkMode }"
-                        >
-                            <i class="fa fa-envelope me-3"></i>
-                            info@capsci-uganda.org
-                        </p>
-                        <p
-                            class="footer-p"
-                            :class="{ 'dark-theme-paragraph': isDarkMode }"
-                        >
-                            <i class="fa fa-phone me-3"></i> +256-392-150-047
-                        </p>
-                    </div>
-                </div>
-                <div
-                    class="fixed-bottom-right"
-                    style="margin-bottom: 70px; right: 20px"
-                >
-                    <a
-                        class="twitter-dm-button w3-btn w3-green floating-icon"
-                        href="https://wa.me/256774526849"
-                    >
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-
-                <div
-                    class="fixed-bottom-right"
-                    style="bottom: 80px; right: 80px; margin-bottom: 10px"
-                >
-                    <a
-                        class="twitter-dm-button w3-btn w3-black floating-icon"
-                        href="https://x.com/UgandaSickle"
-                    >
-                        <i class="fab fa-x"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <div
-            class="footer-bottom text-center p-4 footer-end"
-            :class="{ 'dark-theme-footer-bottom': isDarkMode }"
-        >
-            <p
-                style="font-size: 16px"
-                :class="{ 'dark-theme-text': isDarkMode }"
+        <div class="floating-wrapper twitter-float">
+            <a
+                class="floating-icon twitter-color"
+                href="https://x.com/UgandaSickle"
+                target="_blank"
             >
-                &copy; 2025 Copyright:
-                <a
-                    href="#"
-                    class="text-reset fw-bold-2"
-                    style="font-size: 16px"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                    >capsci-uganda</a
-                >
-            </p>
-            <p class="footer-end" :class="{ 'dark-theme-text': isDarkMode }">
-                Powered By:
-                <a
-                    href="https://www.cotiafrica.com"
-                    class="text-reset fw-bold-2"
-                    style="font-size: 16px"
-                    :class="{ 'dark-theme-link': isDarkMode }"
-                    >CodeToInnovate Africa</a
-                >
-            </p>
+                <i class="fab fa-x-twitter"></i>
+            </a>
         </div>
     </footer>
 </template>
 
 <style scoped>
-.footer-section {
-    background-color: #2c3e50;
-    color: #fff;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
 
-body.dark-theme-body .footer-section {
-    background-color: #222;
-}
-
-body.dark-theme-body h6 {
-    color: red;
-}
-
-text-uppercase .fw-bold {
-    font-size: 18px;
-    font-family: "poppins", sans-serif;
-}
-
-.footer-p {
-    font-size: 14px;
-}
-
-.footer-link {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-    color: #f39c12;
-}
-
-body.dark-theme-body .footer-link {
+/* --- Base Footer Styling --- */
+.footer-academy-custom {
+    font-family: "Montserrat", sans-serif;
+    background-color: #242424;
     color: white;
+    padding: 40px 0 20px;
+    border-top: 10px rgba(128, 0, 0, 0.8);
 }
 
-body.dark-theme-body .footer-link:hover {
-    color: blue;
+/* Container and Layout */
+.container-compact {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-.footer-social-icons i {
-    font-size: 20px;
-    margin: 0 10px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-social-icons i:hover {
-    color: white;
-}
-
-body.dark-theme-body .footer-social-icons i {
-    color: white;
-}
-
-body.dark-theme-body .footer-social-icons i:hover {
-    color: lightblue;
-}
-
-.footer-logo {
-    width: 150px;
-}
-
-.footer-bottom {
+.row-compact {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+    text-align: left;
 }
 
-body.dark-theme-body .footer-bottom {
-    background-color: #1a1a1a;
+/* Columns */
+.col-logo,
+.col-links,
+.col-focus,
+.col-contact {
+    padding: 0 15px;
+}
+
+.col-logo {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+.col-links {
+    flex: 0 0 15%;
+    max-width: 15%;
+}
+.col-focus {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+.col-contact {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+/* Headings */
+.footer-academy-custom h6 {
+    color: red;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Logo & Tagline */
+.footer-logo {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+.academy-name {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.tagline-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+/* Links */
+.footer-academy-custom a,
+.footer-academy-custom p {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    transition: color 0.2s ease;
+    display: block;
+}
+
+.footer-academy-custom a:hover {
+    color: rgba(128, 0, 0, 0.8);
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
     color: white;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
 }
 
-.footer-bottom p {
-    margin: 0;
+.social-icons a:hover {
+    color: rgba(128, 0, 0, 0.8);
+    transform: translateY(-2px);
 }
 
-.fw-bold-2 {
-    font-size: 4px;
-}
-
-body.dark-theme-body .dark-theme-text {
-    color: white;
-}
-
-body.dark-theme-body .dark-theme-heading {
+/* Contact Info */
+.col-contact p i {
     color: red;
 }
 
-body.dark-theme-body .dark-theme-paragraph {
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.btn-cta {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.95em;
+    text-align: center;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+}
+
+.btn-partner {
+    background-color: rgba(128, 0, 0, 0.8);
     color: white;
 }
 
-body.dark-theme-body .dark-theme-border-bottom {
-    border-bottom-color: white;
+.btn-partner:hover {
+    background-color: white;
+    color: #00a36c;
+    transform: translateY(-2px);
 }
 
-.fixed-bottom-right {
+.btn-donate {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+}
+
+.btn-donate:hover {
+    background-color: rgba(128, 0, 0, 0.8);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 0.85rem;
+}
+
+.footer-bottom a {
+    color: red;
+}
+
+.footer-bottom a:hover {
+    color: white;
+}
+
+/* Floating Buttons */
+.floating-wrapper {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
     z-index: 1000;
+}
+
+.whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+}
+
+.twitter-float {
+    bottom: 75px;
+    right: 20px;
 }
 
 .floating-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
     color: white;
-    text-decoration: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
 }
 
-.w3-btn {
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    background-color: transparent;
+.floating-icon:hover {
+    transform: scale(1.08);
 }
 
-.w3-green {
-    background-color: #4caf50 !important;
+.whatsapp-color {
+    background-color: #25d366;
 }
 
-.w3-black {
-    background-color: #000 !important;
+.twitter-color {
+    background-color: black;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .row-compact {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .col-logo,
+    .col-links,
+    .col-focus,
+    .col-contact {
+        flex: 1 1 100%;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .footer-academy-custom h6::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .col-links a {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .button-group {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 300px;
+    }
 }
 </style>

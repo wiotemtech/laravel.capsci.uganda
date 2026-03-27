@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>CAPSCI-UGANDA</title>
+<link rel="icon" href="{{ asset('assets/images/logo1.jpg') }}" type="image/x-icon">
+
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.bunny.net">

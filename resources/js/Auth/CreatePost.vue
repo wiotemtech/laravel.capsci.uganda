@@ -21,6 +21,15 @@ const handleFileChange = (e) => {
     }
 };
 
+
+const toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+});
+
 const getBlogs = async () => {
     try {
         const response = await axios.get(`/api/blogs/${route.params.id}/edit`);
